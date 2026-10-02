@@ -26,6 +26,12 @@
   <link rel="preload" as="image" href="Photos/P4.jpg" fetchpriority="high">
   <link rel="preload" as="image" href="Photos/P5.jpg" fetchpriority="high">
   <link rel="preload" as="image" href="Photos/P6.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="Photos/P7.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="Photos/P8.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="Photos/P9.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="Photos/P10.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="Photos/P11.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="Photos/P12.jpg" fetchpriority="high">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Pearl Bipin Photos">
@@ -859,9 +865,10 @@
       z-index: 220;
       display: grid;
       place-items: center;
-      align-content: center;
-      gap: 22px;
       background: var(--black);
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
       transition: opacity .34s cubic-bezier(.19,1,.22,1), visibility .34s ease;
     }
 
@@ -871,22 +878,58 @@
       pointer-events: none;
     }
 
-    .intro-loader-mark {
+    .intro-loader-inner {
+      display: grid;
+      place-items: center;
+      text-align: center;
+      min-width: min(86vw, 560px);
+    }
+
+    .intro-stage {
+      grid-area: 1 / 1;
+      opacity: 0;
+      transform: translateY(10px);
+      white-space: nowrap;
+    }
+
+    .intro-stage-initial {
       color: var(--paper);
       font-family: var(--serif);
-      font-size: 2.6rem;
+      font-size: clamp(2.7rem, 5vw, 4.2rem);
       font-weight: 500;
-      letter-spacing: .03em;
-      opacity: 0;
-      transform: translateY(8px);
-      animation: loaderMark .55s .05s cubic-bezier(.19,1,.22,1) forwards;
+      letter-spacing: .035em;
+      animation: introStage .42s .02s cubic-bezier(.19,1,.22,1) both;
+    }
+
+    .intro-stage-name {
+      color: var(--paper);
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 500;
+      letter-spacing: .015em;
+      animation: introStage .42s .33s cubic-bezier(.19,1,.22,1) both;
+    }
+
+    .intro-stage-kicker {
+      color: var(--gold);
+      font-family: var(--sans);
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      animation: introStage .42s .64s cubic-bezier(.19,1,.22,1) both;
     }
 
     .intro-loader-line {
-      width: 74px;
+      width: 92px;
       height: 1px;
+      margin-top: 86px;
       overflow: hidden;
-      background: rgba(210,174,98,.16);
+      background: rgba(210,174,98,.15);
+      opacity: 0;
+      transform: scaleX(.55);
+      transform-origin: center;
+      animation: introLineIn .38s .71s cubic-bezier(.19,1,.22,1) both;
     }
 
     .intro-loader-line span {
@@ -895,65 +938,40 @@
       height: 100%;
       background: var(--gold);
       transform: translateX(-100%);
-      animation: loaderLine .62s .08s cubic-bezier(.19,1,.22,1) forwards;
+      animation: loaderLine .48s .74s cubic-bezier(.19,1,.22,1) both;
     }
 
-    @keyframes loaderMark {
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes introStage {
+      0% {
+        opacity: 0;
+        transform: translateY(10px) scale(.99);
+      }
+      18% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      72% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-6px) scale(1.005);
+      }
+    }
+
+    @keyframes introLineIn {
+      from { opacity: 0; transform: scaleX(.55); }
+      to   { opacity: .9; transform: scaleX(1); }
     }
 
     @keyframes loaderLine {
-      to { transform: translateX(0); }
+      from { transform: translateX(-100%); }
+      to   { transform: translateX(0); }
     }
-
-    @keyframes loaderExit {
-      to { opacity: 0; transform: translateY(-7px); }
-    }
-
-    /* ----------------------------------------------------------
-       Performance pass
-       Keep the scroll path light. The page's motion lives in the
-       typography/interludes; photographs should paint immediately.
-    ---------------------------------------------------------- */
-    .photo img {
-      display: block;
-      transform: none;
-      backface-visibility: visible;
-      -webkit-backface-visibility: visible;
-      filter: none;
-      opacity: .955;
-      will-change: auto;
-      contain: paint;
-    }
-
-    .section,
-    .closing {
-      content-visibility: visible;
-      contain: none;
-    }
-
-    .grain {
-      mix-blend-mode: normal;
-      opacity: .018;
-    }
-
-    .topbar {
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-      background: rgba(6,6,6,.94);
-    }
-
-    .reveal {
-      transition:
-        opacity .38s cubic-bezier(.19,1,.22,1),
-        transform .38s cubic-bezier(.19,1,.22,1);
-    }
-
 
     .opening-inner { opacity: 1; transform: none; }
 
-
-    /* The opening is the first thing the visitor should see immediately. */
     .opening-inner.reveal {
       opacity: 1;
       transform: none;
@@ -970,15 +988,14 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-
     /* One restrained chapter rule per major section.
-       The section's own index carries the text; the rule supplies the visual pause. */
+       The rule provides the pause; the section index carries the label. */
     .section > .site-shell > .section-intro::before {
       content: "";
       display: block;
       width: min(570px, 70vw);
       height: 1px;
-      margin: 0 auto 36px;
+      margin: 0 auto 40px;
       background: linear-gradient(
         to right,
         transparent,
@@ -991,13 +1008,113 @@
       transform-origin: center;
       opacity: .72;
       transition:
-        transform .58s cubic-bezier(.19,1,.22,1),
-        opacity .58s ease;
+        transform .48s cubic-bezier(.19,1,.22,1),
+        opacity .48s ease;
     }
 
     .section > .site-shell > .section-intro.visible::before {
       transform: scaleX(1);
       opacity: .9;
+    }
+
+    /* ----------------------------------------------------------
+       Performance pass
+       The scroll path stays almost entirely native/compositor work.
+    ---------------------------------------------------------- */
+    .photo img {
+      display: block;
+      transform: none;
+      backface-visibility: visible;
+      -webkit-backface-visibility: visible;
+      filter: none;
+      opacity: .955;
+      will-change: auto;
+      contain: none;
+      image-rendering: auto;
+    }
+
+    .section,
+    .closing {
+      content-visibility: visible;
+      contain: none;
+    }
+
+    .grain {
+      mix-blend-mode: normal;
+      opacity: .012;
+    }
+
+    .topbar {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      background: rgba(6,6,6,.94);
+    }
+
+    .reveal {
+      transition:
+        opacity .34s cubic-bezier(.19,1,.22,1),
+        transform .34s cubic-bezier(.19,1,.22,1);
+    }
+
+    /* Give the editorial introduction and the image field distinct stages. */
+    .section > .site-shell > .section-intro {
+      margin-bottom: 112px;
+    }
+
+    .section + .section {
+      padding-top: 158px;
+    }
+
+    /* The smaller collections need the same breathing room. */
+    #more .mini-wrap > .section-intro {
+      margin-top: 132px !important;
+      margin-bottom: 54px !important;
+    }
+
+    #more .mini-wrap > .section-intro:first-child {
+      margin-top: 0 !important;
+    }
+
+    /* Slightly more space after the preceding gallery before the next chapter. */
+    .section + .section > .site-shell > .section-intro {
+      margin-top: 0;
+    }
+
+    @media (max-width: 960px) {
+      .section {
+        padding-top: 132px;
+      }
+
+      .section + .section {
+        padding-top: 146px;
+      }
+
+      .section > .site-shell > .section-intro {
+        margin-bottom: 92px;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .section {
+        padding-top: 105px;
+      }
+
+      .section + .section {
+        padding-top: 118px;
+      }
+
+      .section > .site-shell > .section-intro {
+        margin-bottom: 70px;
+      }
+
+      #more .mini-wrap > .section-intro {
+        margin-top: 105px !important;
+        margin-bottom: 42px !important;
+      }
+
+      .intro-loader-line {
+        margin-top: 73px;
+      }
     }
 
   </style>
@@ -1006,8 +1123,12 @@
 <body>
 
   <div class="intro-loader" id="introLoader" aria-hidden="true">
-    <div class="intro-loader-mark">P.B.</div>
-    <div class="intro-loader-line"><span></span></div>
+    <div class="intro-loader-inner">
+      <div class="intro-stage intro-stage-initial">P.B.</div>
+      <div class="intro-stage intro-stage-name">Pearl Bipin</div>
+      <div class="intro-stage intro-stage-kicker">A personal archive</div>
+      <div class="intro-loader-line"><span></span></div>
+    </div>
   </div>
 
   <div class="grain" aria-hidden="true"></div>
@@ -1070,12 +1191,12 @@
           <figure class="photo"><img src="Photos/P4.jpg" loading="eager" fetchpriority="high" decoding="async" alt="Pearl Bipin — personal photograph P4"><span class="photo-label">P4</span></figure>
           <figure class="photo"><img src="Photos/P5.jpg" loading="eager" fetchpriority="high" decoding="async" alt="Pearl Bipin — personal photograph P5"><span class="photo-label">P5</span></figure>
           <figure class="photo"><img src="Photos/P6.jpg" loading="eager" fetchpriority="high" decoding="async" alt="Pearl Bipin — personal photograph P6"><span class="photo-label">P6</span></figure>
-          <figure class="photo"><img src="Photos/P7.jpg" alt="Pearl Bipin — personal photograph P7" loading="lazy" decoding="async"><span class="photo-label">P7</span></figure>
-          <figure class="photo"><img src="Photos/P8.jpg" alt="Pearl Bipin — personal photograph P8" loading="lazy" decoding="async"><span class="photo-label">P8</span></figure>
-          <figure class="photo"><img src="Photos/P9.jpg" alt="Pearl Bipin — personal photograph P9" loading="lazy" decoding="async"><span class="photo-label">P9</span></figure>
-          <figure class="photo"><img src="Photos/P10.jpg" alt="Pearl Bipin — personal photograph P10" loading="lazy" decoding="async"><span class="photo-label">P10</span></figure>
-          <figure class="photo"><img src="Photos/P11.jpg" alt="Pearl Bipin — personal photograph P11" loading="lazy" decoding="async"><span class="photo-label">P11</span></figure>
-          <figure class="photo"><img src="Photos/P12.jpg" alt="Pearl Bipin — personal photograph P12" loading="lazy" decoding="async"><span class="photo-label">P12</span></figure>
+          <figure class="photo"><img src="Photos/P7.jpg" loading="eager" fetchpriority="high" alt="Pearl Bipin — personal photograph P7" loading="lazy" decoding="async"><span class="photo-label">P7</span></figure>
+          <figure class="photo"><img src="Photos/P8.jpg" loading="eager" fetchpriority="high" alt="Pearl Bipin — personal photograph P8" loading="lazy" decoding="async"><span class="photo-label">P8</span></figure>
+          <figure class="photo"><img src="Photos/P9.jpg" loading="eager" fetchpriority="high" alt="Pearl Bipin — personal photograph P9" loading="lazy" decoding="async"><span class="photo-label">P9</span></figure>
+          <figure class="photo"><img src="Photos/P10.jpg" loading="eager" fetchpriority="high" alt="Pearl Bipin — personal photograph P10" loading="lazy" decoding="async"><span class="photo-label">P10</span></figure>
+          <figure class="photo"><img src="Photos/P11.jpg" loading="eager" fetchpriority="high" alt="Pearl Bipin — personal photograph P11" loading="lazy" decoding="async"><span class="photo-label">P11</span></figure>
+          <figure class="photo"><img src="Photos/P12.jpg" loading="eager" fetchpriority="high" alt="Pearl Bipin — personal photograph P12" loading="lazy" decoding="async"><span class="photo-label">P12</span></figure>
           <figure class="photo"><img src="Photos/P13.jpg" alt="Pearl Bipin — personal photograph P13" loading="lazy" decoding="async"><span class="photo-label">P13</span></figure>
           <figure class="photo"><img src="Photos/P14.jpg" alt="Pearl Bipin — personal photograph P14" loading="lazy" decoding="async"><span class="photo-label">P14</span></figure>
           <figure class="photo"><img src="Photos/P15.jpg" alt="Pearl Bipin — personal photograph P15" loading="lazy" decoding="async"><span class="photo-label">P15</span></figure>
@@ -1380,7 +1501,7 @@
                 observer.unobserve(entry.target);
               });
             }, {
-              rootMargin: "140px 0px 140px 0px",
+              rootMargin: "600px 0px 600px 0px",
               threshold: 0
             })
           : null;
@@ -1395,17 +1516,18 @@
       }
 
       /*
-       * LINEAR IMAGE PIPELINE
+       * ARCHIVE-WIDE IMAGE PIPELINE
        *
-       * The visitor moves from top to bottom, so the browser does the same.
-       * We request a controlled number of images ahead of the visitor,
-       * keeping bandwidth busy without turning the page into a 100-image
-       * download at once.
+       * The entire archive is known in advance. Start requesting it immediately
+       * while the opening sequence is playing, but keep concurrency bounded so
+       * the browser does not become CPU/network saturated.
        */
       const photoImages = [...document.querySelectorAll(".photo img")];
+      const totalPhotos = photoImages.length;
       const prefetchQueue = [];
-      const prefetchCache = new Map();
-      const queued = new Set();
+      const queued = new Uint8Array(totalPhotos);
+      const completed = new Uint8Array(totalPhotos);
+      const probes = new Array(totalPhotos);
       let activePrefetches = 0;
 
       const connection =
@@ -1415,133 +1537,162 @@
 
       const saveData = Boolean(connection && connection.saveData);
       const effectiveType = connection && connection.effectiveType;
-      const isSlowNetwork = effectiveType === "slow-2g" || effectiveType === "2g";
+      const isSlowNetwork =
+        effectiveType === "slow-2g" ||
+        effectiveType === "2g";
 
-      const MAX_ACTIVE = saveData ? 1 : (isSlowNetwork ? 2 : 4);
-      const INITIAL_AHEAD = saveData ? 4 : (isSlowNetwork ? 6 : 12);
-      const ROLLING_AHEAD = saveData ? 3 : (isSlowNetwork ? 5 : 12);
+      // Typical desktop: keep eight image transfers moving at once.
+      // Slower / save-data connections get a gentler queue.
+      const MAX_ACTIVE = saveData ? 2 : (isSlowNetwork ? 3 : 8);
+      const INITIAL_BATCH = saveData ? 8 : (isSlowNetwork ? 14 : totalPhotos);
+
+      function enqueuePrefetch(index, priority = "low") {
+        if (index < 0 || index >= totalPhotos) return;
+        if (queued[index] || completed[index]) return;
+
+        queued[index] = 1;
+        prefetchQueue.push({ index, priority });
+
+        // High-priority items move to the front without repeatedly sorting
+        // a large queue.
+        if (priority === "high") {
+          prefetchQueue.sort((a, b) =>
+            a.priority === b.priority ? a.index - b.index : (a.priority === "high" ? -1 : 1)
+          );
+        }
+
+        pumpPrefetchQueue();
+      }
 
       function pumpPrefetchQueue() {
         while (activePrefetches < MAX_ACTIVE && prefetchQueue.length) {
-          let position = prefetchQueue.findIndex(item => item.priority === "high");
-          if (position < 0) position = 0;
-
-          const job = prefetchQueue.splice(position, 1)[0];
+          const job = prefetchQueue.shift();
           const source = photoImages[job.index];
           if (!source) continue;
 
           activePrefetches++;
 
           const probe = new Image();
+          probes[job.index] = probe;
           probe.decoding = "async";
 
           if ("fetchPriority" in probe) {
             probe.fetchPriority = job.priority;
           }
 
-          probe.src = source.currentSrc || source.src;
-
-          const done = () => {
+          const finish = () => {
             activePrefetches--;
-            prefetchCache.set(job.index, probe);
+            completed[job.index] = 1;
+
+            // Ask the browser to decode the already-downloaded probe when possible.
+            // The decoded image remains available to the browser's image cache.
+            if (probe.complete && probe.naturalWidth > 0 && "decode" in probe) {
+              probe.decode().catch(() => {});
+            }
+
             pumpPrefetchQueue();
           };
 
-          probe.addEventListener("load", done, { once: true });
-          probe.addEventListener("error", done, { once: true });
+          probe.addEventListener("load", finish, { once: true });
+          probe.addEventListener("error", finish, { once: true });
+
+          // Setting src is the actual network request.
+          probe.src = source.currentSrc || source.src;
         }
       }
 
-      function enqueue(index, priority = "low") {
-        if (index < 0 || index >= photoImages.length) return;
-        if (queued.has(index)) return;
+      function enqueueRange(start, end, priority = "low") {
+        const first = Math.max(0, start);
+        const last = Math.min(totalPhotos - 1, end);
 
-        queued.add(index);
-        prefetchQueue.push({ index, priority });
-        pumpPrefetchQueue();
-      }
-
-      function warmAhead(centerIndex, count = ROLLING_AHEAD) {
-        const end = Math.min(photoImages.length, centerIndex + count + 1);
-
-        for (let i = centerIndex; i < end; i++) {
-          enqueue(i, i < centerIndex + 4 ? "high" : "low");
+        for (let i = first; i <= last; i++) {
+          enqueuePrefetch(i, priority);
         }
       }
 
-      // Start the first batch while the opening animation is playing.
-      warmAhead(0, INITIAL_AHEAD);
+      // Start the archive immediately. The opening animation is now useful time:
+      // while the visitor sees P.B. → Pearl Bipin → A personal archive,
+      // the browser is already requesting the photograph archive.
+      if (saveData || isSlowNetwork) {
+        enqueueRange(0, INITIAL_BATCH - 1, "high");
+        enqueueRange(INITIAL_BATCH, totalPhotos - 1, "low");
+      } else {
+        enqueueRange(0, totalPhotos - 1, "low");
+        enqueueRange(0, Math.min(11, totalPhotos - 1), "high");
+      }
 
-      // As each photograph approaches, extend the rolling window.
-      const linearObserver = new IntersectionObserver((entries, observer) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
+      // Use the visitor's linear movement as a secondary priority signal.
+      // This never waits for scrolling; it simply promotes nearby images.
+      if ("IntersectionObserver" in window) {
+        const linearObserver = new IntersectionObserver((entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
 
-          const index = Number(entry.target.dataset.photoIndex);
-          if (Number.isFinite(index)) {
-            warmAhead(index);
+            const index = Number(entry.target.dataset.photoIndex);
+            if (!Number.isFinite(index)) continue;
+
+            // Promote a generous forward window when the visitor gets here.
+            for (let i = index; i <= Math.min(totalPhotos - 1, index + 14); i++) {
+              enqueuePrefetch(i, i <= index + 5 ? "high" : "low");
+            }
           }
+        }, {
+          rootMargin: "2600px 0px 2600px 0px",
+          threshold: 0
+        });
 
-          observer.unobserve(entry.target);
-        }
-      }, {
-        rootMargin: "2200px 0px 2200px 0px",
-        threshold: 0
+        photoImages.forEach((img, index) => {
+          img.dataset.photoIndex = index;
+          linearObserver.observe(img);
+        });
+      }
+
+      // Let the DOM images use the normal browser loader semantics, but
+      // explicitly mark them async for decoding.
+      photoImages.forEach(img => {
+        img.decoding = "async";
       });
 
-      photoImages.forEach((img, index) => {
-        img.dataset.photoIndex = index;
-        linearObserver.observe(img);
-      });
+      // Keep an intentionally small decode budget on idle periods so that
+      // scrolling does not suddenly trigger a large decode burst.
+      let nextDecodeIndex = 0;
 
-      /*
-       * Keep the first visible set decoded while the browser is idle.
-       * Do not decode the whole archive; that would move work onto the scroll path.
-       */
-      const warmFirstImages = () => {
-        const count = saveData ? 2 : 4;
-        for (let i = 0; i < Math.min(count, photoImages.length); i++) {
-          const img = photoImages[i];
+      function decodeNextIdleChunk() {
+        const chunkSize = saveData ? 1 : (isSlowNetwork ? 1 : 3);
+        let decodedThisRound = 0;
+
+        while (nextDecodeIndex < totalPhotos && decodedThisRound < chunkSize) {
+          const img = photoImages[nextDecodeIndex++];
+          decodedThisRound++;
+
           if ("decode" in img) {
             img.decode().catch(() => {});
           }
         }
-      };
 
-      if ("requestIdleCallback" in window) {
-        requestIdleCallback(warmFirstImages, { timeout: 700 });
-      } else {
-        window.setTimeout(warmFirstImages, 120);
-      }
-
-      /*
-       * Decode only the first few images while the browser is otherwise idle.
-       * This moves CPU work away from a fast scroll gesture.
-       */
-      const warmVisibleImages = () => {
-        const warmCount = saveData ? 2 : (isSlowNetwork ? 2 : 4);
-
-        for (let i = 0; i < Math.min(warmCount, photoImages.length); i++) {
-          const img = photoImages[i];
-          if ("decode" in img) {
-            img.decode().catch(() => {});
+        if (nextDecodeIndex < totalPhotos) {
+          if ("requestIdleCallback" in window) {
+            requestIdleCallback(decodeNextIdleChunk, { timeout: 1200 });
+          } else {
+            window.setTimeout(decodeNextIdleChunk, 220);
           }
         }
-      };
-
-      if ("requestIdleCallback" in window) {
-        requestIdleCallback(warmVisibleImages, { timeout: 900 });
-      } else {
-        window.setTimeout(warmVisibleImages, 180);
       }
 
+      if ("requestIdleCallback" in window) {
+        requestIdleCallback(decodeNextIdleChunk, { timeout: 900 });
+      } else {
+        window.setTimeout(decodeNextIdleChunk, 260);
+      }
+
+      // Short but purposeful opening sequence.
       // Short opening animation. The first prefetch wave starts immediately;
       // the page never waits on the network before becoming interactive.
       const introLoader = document.getElementById("introLoader");
 
       window.setTimeout(() => {
         introLoader.classList.add("done");
-      }, 500);
+      }, saveData ? 820 : 1220);
     })();
   </script>
 </body>
