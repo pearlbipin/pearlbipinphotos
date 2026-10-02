@@ -1,0 +1,38 @@
+# Pearl Bipin Photos
+
+> Pearl Bipin Photos is the personal visual archive of Pearl Bipin, containing personal photographs, artwork, motorcycles, family memories, photographs of his pet cat Kitchu, food he cooks, and a small miscellaneous collection.
+
+## Canonical site
+
+- https://pearlbipinphotos.vercel.app/
+
+## About
+
+Pearl Bipin Photos is a single-page personal visual archive. The homepage is the canonical page for the site.
+
+The site is organized into these sections:
+
+- Personal — portraits, ordinary days, dressed-up days, and photographs Pearl Bipin chose to keep.
+- Things I made — origami, drawings, sketches, and other handmade work.
+- The motorcycle corner — photographs of Pearl Bipin, his motorcycles, and moments around two wheels.
+- Memories — older photographs of Pearl Bipin, his parents, and family memories.
+- The little details — photographs of Kitchu, food Pearl Bipin cooks, and miscellaneous music-related photographs.
+
+## Machine-readable resources
+
+- Sitemap: https://pearlbipinphotos.vercel.app/sitemap.xml
+- Robots: https://pearlbipinphotos.vercel.app/robots.txt
+
+## Related website
+
+- Pearl Bipin Papers: https://pearlbipinpapers.vercel.app/
+
+## Related personal site
+
+- https://pearlbipinpulickal.neocities.org/
+
+## Notes
+
+The site uses the canonical homepage URL above. Section navigation uses in-page fragment URLs on that homepage rather than separate HTML pages.
+
+This file is provided as a concise description for AI systems or other tools that choose to read `llms.txt`; it is not required for Google Search indexing.
