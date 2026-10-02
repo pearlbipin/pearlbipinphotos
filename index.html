@@ -33,6 +33,7 @@
   >
   <meta property="og:url" content="https://pearlbipinphotos.vercel.app/">
   <meta property="og:image" content="https://pearlbipinphotos.vercel.app/Photos/P1.jpg">
+  <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:alt" content="Pearl Bipin — personal photograph">
 
   <meta name="twitter:card" content="summary_large_image">
@@ -41,6 +42,7 @@
     name="twitter:description"
     content="A personal collection of photographs, artwork, motorcycles, memories, and small pieces of everyday life."
   >
+  <meta name="twitter:url" content="https://pearlbipinphotos.vercel.app/">
   <meta name="twitter:image" content="https://pearlbipinphotos.vercel.app/Photos/P1.jpg">
   <meta name="twitter:image:alt" content="Pearl Bipin — personal photograph">
 
@@ -48,27 +50,48 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "ProfilePage",
-    "@id": "https://pearlbipinphotos.vercel.app/#profile",
-    "url": "https://pearlbipinphotos.vercel.app/",
-    "name": "Pearl Bipin Photos",
-    "description": "Pearl Bipin's personal collection of photographs, artwork, motorcycles, memories, Kitchu his pet cat, food he cooks, and everyday life.",
-    "isPartOf": {
-      "@type": "WebSite",
-      "@id": "https://pearlbipinphotos.vercel.app/#website",
-      "url": "https://pearlbipinphotos.vercel.app/",
-      "name": "Pearl Bipin Photos"
-    },
-    "mainEntity": {
-      "@type": "Person",
-      "@id": "https://pearlbipinphotos.vercel.app/#pearl-bipin",
-      "name": "Pearl Bipin",
-      "url": "https://pearlbipinphotos.vercel.app/",
-      "image": "https://pearlbipinphotos.vercel.app/Photos/P1.jpg",
-      "sameAs": [
-        "https://pearlbipinpulickal.neocities.org/"
-      ]
-    }
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://pearlbipinphotos.vercel.app/#website",
+        "url": "https://pearlbipinphotos.vercel.app/",
+        "name": "Pearl Bipin Photos",
+        "description": "A personal collection of photographs, artwork, motorcycles, memories, and small pieces of everyday life.",
+        "inLanguage": "en",
+        "publisher": {
+          "@id": "https://pearlbipinphotos.vercel.app/#pearl-bipin"
+        }
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": "https://pearlbipinphotos.vercel.app/#profile",
+        "url": "https://pearlbipinphotos.vercel.app/",
+        "name": "Pearl Bipin Photos",
+        "description": "Pearl Bipin's personal collection of photographs, artwork, motorcycles, memories, Kitchu his pet cat, food he cooks, and everyday life.",
+        "inLanguage": "en",
+        "isPartOf": {
+          "@id": "https://pearlbipinphotos.vercel.app/#website"
+        },
+        "mainEntity": {
+          "@id": "https://pearlbipinphotos.vercel.app/#pearl-bipin"
+        }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://pearlbipinphotos.vercel.app/#pearl-bipin",
+        "name": "Pearl Bipin",
+        "url": "https://pearlbipinphotos.vercel.app/",
+        "description": "Pearl Bipin, the person behind this personal visual archive of photographs, artwork, motorcycles, memories, his pet cat Kitchu, and food he cooks.",
+        "image": "https://pearlbipinphotos.vercel.app/Photos/P1.jpg",
+        "mainEntityOfPage": {
+          "@id": "https://pearlbipinphotos.vercel.app/#profile"
+        },
+        "sameAs": [
+          "https://pearlbipinpulickal.neocities.org/",
+          "https://pearlbipinpapers.vercel.app/"
+        ]
+      }
+    ]
   }
   </script>
 
