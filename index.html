@@ -84,12 +84,11 @@
   <style>
     :root {
       --black: #060606;
-      --black-2: #0b0b0b;
       --paper: #eee9df;
       --soft: #bab2a7;
       --gold: #d2ae62;
       --gold-dim: rgba(210, 174, 98, 0.24);
-      --line: rgba(238, 233, 223, 0.12);
+      --line: rgba(238, 233, 223, 0.10);
       --max: 1380px;
       --serif: "Cormorant Garamond", Georgia, serif;
       --sans: "Manrope", Arial, sans-serif;
@@ -98,8 +97,11 @@
     * { box-sizing: border-box; }
 
     html {
-      scroll-behavior: smooth;
       background: var(--black);
+      scroll-behavior: smooth;
+      scroll-padding-top: 28px;
+      scroll-snap-type: y proximity;
+      overscroll-behavior-x: none;
     }
 
     body {
@@ -122,13 +124,8 @@
       height: auto;
     }
 
-    a {
-      color: inherit;
-    }
-
-    button {
-      font: inherit;
-    }
+    a { color: inherit; }
+    button { font: inherit; }
 
     ::selection {
       background: var(--gold);
@@ -140,31 +137,30 @@
       margin-inline: auto;
     }
 
-    /* -------------------------
-       Subtle page texture
-    -------------------------- */
+    /* ---------------------------------------------------------------
+       Quiet texture
+       --------------------------------------------------------------- */
     .grain {
       position: fixed;
       inset: 0;
       z-index: 100;
       pointer-events: none;
-      opacity: .032;
+      opacity: .012;
       background-image:
         radial-gradient(rgba(255,255,255,.65) .6px, transparent .6px);
       background-size: 4px 4px;
-      mix-blend-mode: soft-light;
+      mix-blend-mode: normal;
     }
 
-    /* -------------------------
-       Header
-    -------------------------- */
+    /* ---------------------------------------------------------------
+       Navigation
+       --------------------------------------------------------------- */
     .topbar {
       position: sticky;
       top: 0;
       z-index: 80;
-      border-bottom: 1px solid rgba(238,233,223,.08);
-      background: rgba(6,6,6,.82);
-      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(238,233,223,.075);
+      background: rgba(6,6,6,.94);
     }
 
     .topbar-inner {
@@ -203,7 +199,7 @@
       font-weight: 500;
       letter-spacing: .15em;
       text-transform: uppercase;
-      transition: color .22s ease;
+      transition: color .18s ease;
     }
 
     .navigation a:hover,
@@ -211,9 +207,9 @@
       color: var(--gold);
     }
 
-    /* -------------------------
+    /* ---------------------------------------------------------------
        Opening
-    -------------------------- */
+       --------------------------------------------------------------- */
     .opening {
       min-height: 82vh;
       display: grid;
@@ -221,6 +217,7 @@
       padding: 118px 0 132px;
       text-align: center;
       position: relative;
+      scroll-snap-align: start;
     }
 
     .opening::before,
@@ -235,13 +232,25 @@
     }
 
     .opening::before { top: 0; }
+
     .opening::after {
       bottom: 0;
       background: linear-gradient(to bottom, var(--gold-dim), transparent);
     }
 
     .opening-inner {
-      max-width: 900px;
+      max-width: 920px;
+      opacity: 0;
+      transform: translateY(16px);
+    }
+
+    .opening-inner.is-ready {
+      animation: openingEnter .62s cubic-bezier(.19,1,.22,1) both;
+    }
+
+    @keyframes openingEnter {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     .opening-kicker {
@@ -256,7 +265,7 @@
       margin: 40px 0 32px;
       font-family: var(--serif);
       font-size: clamp(3.85rem, 9vw, 8rem);
-      line-height: .93;
+      line-height: .95;
       font-weight: 400;
       letter-spacing: -.045em;
     }
@@ -277,14 +286,14 @@
       color: #beb6ac;
       font-family: var(--serif);
       font-size: clamp(1.08rem, 1.9vw, 1.35rem);
-      line-height: 1.52;
+      line-height: 1.58;
     }
 
     .opening-note {
       margin-top: 38px;
       color: #78716a;
       font-size: .67rem;
-      letter-spacing: .15em;
+      letter-spacing: .17em;
       text-transform: uppercase;
     }
 
@@ -307,30 +316,55 @@
       opacity: .65;
     }
 
-    /* -------------------------
-       Intro / sections
-    -------------------------- */
-    section {
-      scroll-margin-top: 96px;
-    }
-
+    /* ---------------------------------------------------------------
+       Major sections
+       --------------------------------------------------------------- */
     .section {
-      padding: 118px 0;
+      padding: 145px 0 132px;
+      scroll-snap-align: start;
+      scroll-margin-top: 22px;
     }
 
     .section + .section {
-      border-top: 1px solid rgba(238,233,223,.065);
+      border-top: 1px solid rgba(238,233,223,.055);
     }
 
     .section-intro {
-      width: min(700px, 100%);
-      margin: 0 auto 68px;
+      width: min(720px, 100%);
+      margin: 0 auto 124px;
       text-align: center;
+    }
+
+    .section-intro::before {
+      content: "";
+      display: block;
+      width: min(570px, 70vw);
+      height: 1px;
+      margin: 0 auto 42px;
+      background: linear-gradient(
+        to right,
+        transparent,
+        rgba(210,174,98,.11) 18%,
+        rgba(210,174,98,.44) 50%,
+        rgba(210,174,98,.11) 82%,
+        transparent
+      );
+      transform: scaleX(.38);
+      transform-origin: center;
+      opacity: .58;
+      transition:
+        transform .5s cubic-bezier(.19,1,.22,1),
+        opacity .45s ease;
+    }
+
+    .section-intro.is-visible::before {
+      transform: scaleX(1);
+      opacity: .88;
     }
 
     .section-index {
       display: block;
-      margin-bottom: 12px;
+      margin-bottom: 15px;
       color: var(--gold);
       font-size: .64rem;
       font-weight: 600;
@@ -341,26 +375,32 @@
     .section-title {
       margin: 0;
       font-family: var(--serif);
-      font-size: clamp(2.55rem, 4.7vw, 4.3rem);
-      line-height: 1.03;
+      font-size: clamp(2.7rem, 4.9vw, 4.55rem);
+      line-height: 1.02;
       font-weight: 400;
-      letter-spacing: -.028em;
+      letter-spacing: -.03em;
     }
 
     .section-subtitle {
-      margin: 26px auto 0;
-      color: #928a82;
-      font-size: .78rem;
-      line-height: 1.95;
-      max-width: 520px;
+      width: min(540px, 100%);
+      margin: 25px auto 0;
+      padding-inline: 8px;
+      color: #918980;
+      font-size: .79rem;
+      line-height: 1.98;
     }
 
-    /* -------------------------
-       Masonry gallery
-    -------------------------- */
+    /* ---------------------------------------------------------------
+       Galleries
+       --------------------------------------------------------------- */
     .masonry {
       column-count: 3;
       column-gap: 24px;
+    }
+
+    .masonry.art {
+      column-count: 4;
+      column-gap: 18px;
     }
 
     .photo {
@@ -368,17 +408,39 @@
       margin: 0 0 24px;
       position: relative;
       overflow: hidden;
-      background: #101010;
+      background: #0f0f0f;
       border-radius: 2px;
       cursor: zoom-in;
       outline: none;
+
+      /* Photos are revealed in small groups, not one-by-one. */
+      opacity: 0;
+      transform: translate3d(0, 14px, 0);
+      transition:
+        opacity .36s cubic-bezier(.19,1,.22,1),
+        transform .36s cubic-bezier(.19,1,.22,1);
+    }
+
+    .photo.chunk-visible {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
     }
 
     .photo img {
-      transition:
-        transform .75s cubic-bezier(.19,1,.22,1),
-        opacity .45s ease;
       opacity: .955;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      will-change: auto;
+    }
+
+    @media (hover: hover) {
+      .photo:hover img,
+      .photo:focus-visible img {
+        transform: scale(1.018) translateZ(0);
+        opacity: 1;
+        transition: transform .55s cubic-bezier(.19,1,.22,1), opacity .28s ease;
+      }
     }
 
     .photo::after {
@@ -387,19 +449,12 @@
       inset: 0;
       pointer-events: none;
       background:
-        linear-gradient(to top, rgba(0,0,0,.46), transparent 32%),
-        linear-gradient(to bottom, rgba(0,0,0,.08), transparent 24%);
+        linear-gradient(to top, rgba(0,0,0,.38), transparent 33%);
       opacity: 0;
-      transition: opacity .3s ease;
+      transition: opacity .22s ease;
     }
 
     @media (hover: hover) {
-      .photo:hover img,
-      .photo:focus-visible img {
-        transform: scale(1.022);
-        opacity: 1;
-      }
-
       .photo:hover::after,
       .photo:focus-visible::after {
         opacity: 1;
@@ -412,12 +467,12 @@
       bottom: 13px;
       z-index: 2;
       opacity: 0;
-      transform: translateY(7px);
-      color: rgba(255,255,255,.88);
-      font-size: .6rem;
+      transform: translateY(5px);
+      color: rgba(255,255,255,.86);
+      font-size: .58rem;
       letter-spacing: .15em;
       text-transform: uppercase;
-      transition: opacity .25s ease, transform .25s ease;
+      transition: opacity .2s ease, transform .2s ease;
       pointer-events: none;
     }
 
@@ -427,19 +482,9 @@
       transform: translateY(0);
     }
 
-    /* A little more visual breathing room in large sections. */
-    .masonry.art {
-      column-count: 4;
-      column-gap: 18px;
-    }
-
-    .masonry.art .photo {
-      margin-bottom: 18px;
-    }
-
-    /* -------------------------
+    /* ---------------------------------------------------------------
        Smaller collections
-    -------------------------- */
+       --------------------------------------------------------------- */
     .mini-wrap {
       width: min(980px, 100%);
       margin-inline: auto;
@@ -477,13 +522,24 @@
       object-fit: cover;
     }
 
-    /* -------------------------
-       End note
-    -------------------------- */
+    /* Small visual breath between internal collections. */
+    #more .mini-wrap > .section-intro {
+      margin-top: 132px;
+      margin-bottom: 58px;
+    }
+
+    #more .mini-wrap > .section-intro:first-child {
+      margin-top: 0;
+    }
+
+    /* ---------------------------------------------------------------
+       Closing
+       --------------------------------------------------------------- */
     .closing {
       padding: 165px 0 150px;
       text-align: center;
-      border-top: 1px solid rgba(238,233,223,.065);
+      border-top: 1px solid rgba(238,233,223,.055);
+      scroll-snap-align: start;
     }
 
     .closing-mark {
@@ -499,7 +555,7 @@
       color: #898179;
       font-family: var(--serif);
       font-size: 1.22rem;
-      line-height: 1.58;
+      line-height: 1.62;
     }
 
     .closing .small {
@@ -513,7 +569,7 @@
 
     footer {
       padding: 35px 0 45px;
-      border-top: 1px solid rgba(238,233,223,.065);
+      border-top: 1px solid rgba(238,233,223,.055);
     }
 
     .footer-inner {
@@ -531,9 +587,9 @@
       text-transform: uppercase;
     }
 
-    /* -------------------------
+    /* ---------------------------------------------------------------
        Lightbox
-    -------------------------- */
+       --------------------------------------------------------------- */
     .lightbox {
       position: fixed;
       inset: 0;
@@ -545,7 +601,7 @@
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      transition: opacity .22s ease, visibility .22s ease;
+      transition: opacity .18s ease, visibility .18s ease;
     }
 
     .lightbox.active {
@@ -559,7 +615,7 @@
       max-width: min(92vw, 1500px);
       max-height: 87vh;
       object-fit: contain;
-      border: 1px solid rgba(210,174,98,.25);
+      border: 1px solid rgba(210,174,98,.23);
       box-shadow: 0 35px 120px rgba(0,0,0,.58);
     }
 
@@ -582,7 +638,7 @@
       background: transparent;
       color: #cfc8bf;
       cursor: pointer;
-      transition: color .18s ease, transform .18s ease;
+      transition: color .16s ease, transform .16s ease;
     }
 
     .lightbox button:hover,
@@ -615,33 +671,135 @@
     .lightbox-next:hover,
     .lightbox-prev:focus-visible,
     .lightbox-next:focus-visible {
-      transform: translateY(-50%) scale(1.04);
+      transform: translateY(-50%) scale(1.035);
     }
 
-    /* -------------------------
-       Reveal
-    -------------------------- */
-    .reveal {
-      opacity: 0;
-      transform: translateY(26px);
-      transition:
-        opacity .85s cubic-bezier(.19,1,.22,1),
-        transform .85s cubic-bezier(.19,1,.22,1);
-      transition-delay: var(--reveal-delay, 0ms);
-    }
-
-    .reveal.visible {
+    /* ---------------------------------------------------------------
+       Opening loader
+       --------------------------------------------------------------- */
+    .intro-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 220;
+      display: grid;
+      place-items: center;
+      background: var(--black);
       opacity: 1;
-      transform: translateY(0);
+      visibility: visible;
+      pointer-events: auto;
+      transition: opacity .45s cubic-bezier(.19,1,.22,1), visibility .45s ease;
     }
 
-    /* -------------------------
-       Mobile
-    -------------------------- */
+    .intro-loader.done {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .intro-loader-inner {
+      width: min(86vw, 620px);
+      display: grid;
+      justify-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .intro-stage {
+      min-height: 1em;
+      color: var(--paper);
+      opacity: 0;
+      transform: translateY(10px);
+      font-family: var(--serif);
+      white-space: nowrap;
+      position: absolute;
+      left: 50%;
+      transform-origin: center;
+    }
+
+    .intro-stage-initial {
+      top: 0;
+      font-size: clamp(2.7rem, 5vw, 4.2rem);
+      font-weight: 500;
+      letter-spacing: .035em;
+    }
+
+    .intro-stage-name {
+      top: 0;
+      font-size: clamp(2.2rem, 4vw, 3.15rem);
+      font-weight: 500;
+      letter-spacing: .015em;
+    }
+
+    .intro-stage-kicker {
+      top: 0;
+      color: var(--gold);
+      font-family: var(--sans);
+      font-size: .67rem;
+      font-weight: 600;
+      letter-spacing: .23em;
+      text-transform: uppercase;
+    }
+
+
+    .intro-stage-initial {
+      animation: introFade 1.0s .02s cubic-bezier(.19,1,.22,1) both;
+    }
+
+    .intro-stage-name {
+      animation: introFade 1.0s .82s cubic-bezier(.19,1,.22,1) both;
+    }
+
+    .intro-stage-kicker {
+      animation: introFade 1.0s 1.62s cubic-bezier(.19,1,.22,1) both;
+    }
+
+
+    @keyframes introFade {
+      0%   { opacity: 0; transform: translate(-50%, 10px); }
+      18%  { opacity: 1; transform: translate(-50%, 0); }
+      65%  { opacity: 1; transform: translate(-50%, 0); }
+      100% { opacity: 0; transform: translate(-50%, -6px); }
+    }
+
+    .intro-loader-line {
+      position: absolute;
+      top: 70px;
+      width: 108px;
+      height: 1px;
+      overflow: hidden;
+      background: rgba(210,174,98,.13);
+      opacity: 0;
+      transform: scaleX(.55);
+      animation: loaderLineIn .46s 2.15s cubic-bezier(.19,1,.22,1) both;
+    }
+
+    .intro-loader-line span {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: var(--gold);
+      transform: translateX(-100%);
+      animation: loaderLine .58s 2.2s cubic-bezier(.19,1,.22,1) both;
+    }
+
+    @keyframes loaderLineIn {
+      from { opacity: 0; transform: scaleX(.55); }
+      to   { opacity: .9; transform: scaleX(1); }
+    }
+
+    @keyframes loaderLine {
+      from { transform: translateX(-100%); }
+      to   { transform: translateX(0); }
+    }
+
+    /* ---------------------------------------------------------------
+       Responsive
+       --------------------------------------------------------------- */
     @media (max-width: 960px) {
       .masonry { column-count: 2; }
       .masonry.art { column-count: 3; }
       .mini-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+      .section { padding-top: 132px; }
     }
 
     @media (max-width: 680px) {
@@ -660,37 +818,71 @@
       }
 
       .navigation {
+        width: 100%;
         justify-content: flex-start;
         gap: 12px 16px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        flex-wrap: nowrap;
+        padding-bottom: 3px;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
       }
 
+      .navigation::-webkit-scrollbar { display: none; }
+
       .opening {
-        min-height: 74vh;
-        padding: 92px 0 97px;
+        min-height: 76vh;
+        padding: 95px 0 100px;
       }
 
       .opening h1 {
-        font-size: clamp(3.7rem, 20vw, 5.6rem);
+        font-size: clamp(3.65rem, 20.5vw, 5.8rem);
+        margin: 44px 0 34px;
+      }
+
+      .opening-lead {
+        line-height: 1.62;
+      }
+
+      .opening-note {
+        margin-top: 40px;
+      }
+
+      .scroll-cue {
+        margin-top: 48px;
       }
 
       .section {
-        padding: 92px 0;
+        padding: 108px 0 106px;
       }
 
       .section-intro {
-        margin-bottom: 51px;
+        margin-bottom: 84px;
+      }
+
+      .section-intro::before {
+        width: min(430px, 78vw);
+        margin-bottom: 34px;
+      }
+
+      .section-title {
+        font-size: clamp(2.55rem, 10.5vw, 3.7rem);
+      }
+
+      .section-subtitle {
+        line-height: 1.95;
       }
 
       .masonry,
       .masonry.art {
         column-count: 2;
-        column-gap: 9px;
+        column-gap: 11px;
       }
 
       .photo,
       .masonry.art .photo {
-        margin-bottom: 9px;
-        border-radius: 1px;
+        margin-bottom: 11px;
       }
 
       .mini-grid {
@@ -703,8 +895,22 @@
         gap: 9px;
       }
 
+      #more .mini-wrap > .section-intro {
+        margin-top: 102px;
+        margin-bottom: 46px;
+      }
+
       .closing {
-        padding: 95px 0;
+        padding: 105px 0 100px;
+      }
+
+      .closing p {
+        font-size: 1.16rem;
+        line-height: 1.68;
+      }
+
+      footer {
+        padding-bottom: 38px;
       }
 
       .footer-inner {
@@ -728,392 +934,48 @@
       .lightbox-next {
         right: 2px;
       }
-    }
 
+      .intro-loader-line {
+        top: 58px;
+        width: 86px;
+      }
+    }
 
     @media (max-width: 960px) and (orientation: landscape) {
       .opening {
         min-height: 112vh;
-        padding: 88px 0 105px;
+        padding: 86px 0 105px;
       }
 
       .opening h1 {
-        font-size: clamp(3.4rem, 10.5vw, 6rem);
-      }
-    }
-
-    @media (min-width: 681px) and (max-width: 1100px) {
-      .site-shell {
-        width: min(100% - 38px, var(--max));
-      }
-
-      .opening {
-        padding-top: 102px;
-        padding-bottom: 116px;
-      }
-
-      .topbar-inner {
-        min-height: 78px;
-      }
-    }
-
-    @media (max-width: 680px) {
-      .opening h1 {
-        font-size: clamp(3.65rem, 20.5vw, 5.8rem);
-      }
-
-      .opening-lead {
-        max-width: 530px;
-        line-height: 1.55;
-      }
-
-      .section-intro {
-        margin-bottom: 48px;
-      }
-
-      .section-subtitle {
-        line-height: 1.9;
-      }
-
-      .navigation {
-        max-width: 100%;
-        overflow-x: auto;
-        overflow-y: hidden;
-        flex-wrap: nowrap;
-        padding-bottom: 3px;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-      }
-
-      .navigation::-webkit-scrollbar {
-        display: none;
-      }
-    }
-
-
-    @media (max-width: 680px) {
-      .section > .site-shell > .section-intro::before {
-        width: min(420px, 78vw);
-        margin-bottom: 30px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .intro-loader-mark,
-      .intro-loader-line span {
-        animation: none;
-      }
-
-      .intro-loader {
-        transition: none;
-      }
-
-      .photo img {
-        filter: none;
-      }
-
-      .reveal {
-        transition: opacity .01ms !important;
-        transform: none !important;
+        font-size: clamp(3.35rem, 10.5vw, 6rem);
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      .reveal,
-      .photo img,
-      .photo::after,
-      .photo-label,
-      .lightbox {
+
+      .intro-loader,
+      .intro-stage,
+      .intro-loader-line,
+      .intro-loader-line span,
+      .opening-inner,
+      .photo,
+      .section-intro::before {
+        animation: none !important;
         transition: none !important;
       }
-    }
-  
-    /* Final spacing polish: more air between typographic blocks and images. */
-    .opening-kicker { opacity: .86; }
-    .opening-note { letter-spacing: .17em; }
-    .scroll-cue { opacity: .82; }
 
-    .section-title + .section-subtitle {
-      padding-inline: 10px;
-    }
-
-    .section-intro + .masonry,
-    .section-intro + .mini-wrap {
-      margin-top: 4px;
-    }
-
-    .masonry + .section-intro {
-      margin-top: 92px;
-    }
-
-    @media (max-width: 680px) {
-      .masonry { column-gap: 11px; }
-      .masonry.art { column-gap: 11px; }
-      .masonry .photo,
-      .masonry.art .photo { margin-bottom: 11px; }
-      .section-title + .section-subtitle { padding-inline: 3px; }
-    }
-
-
-    /* -------------------------
-       Opening transition
-       -------------------------- */
-    .intro-loader {
-      position: fixed;
-      inset: 0;
-      z-index: 220;
-      display: grid;
-      place-items: center;
-      background: var(--black);
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-      transition: opacity .34s cubic-bezier(.19,1,.22,1), visibility .34s ease;
-    }
-
-    .intro-loader.done {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    .intro-loader-inner {
-      display: grid;
-      place-items: center;
-      text-align: center;
-      min-width: min(86vw, 560px);
-    }
-
-    .intro-stage {
-      grid-area: 1 / 1;
-      opacity: 0;
-      transform: translateY(10px);
-      white-space: nowrap;
-    }
-
-    .intro-stage-initial {
-      color: var(--paper);
-      font-family: var(--serif);
-      font-size: clamp(2.7rem, 5vw, 4.2rem);
-      font-weight: 500;
-      letter-spacing: .035em;
-      animation: introStage .42s .02s cubic-bezier(.19,1,.22,1) both;
-    }
-
-    .intro-stage-name {
-      color: var(--paper);
-      font-family: var(--serif);
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 500;
-      letter-spacing: .015em;
-      animation: introStage .42s .33s cubic-bezier(.19,1,.22,1) both;
-    }
-
-    .intro-stage-kicker {
-      color: var(--gold);
-      font-family: var(--sans);
-      font-size: .68rem;
-      font-weight: 600;
-      letter-spacing: .24em;
-      text-transform: uppercase;
-      animation: introStage .42s .64s cubic-bezier(.19,1,.22,1) both;
-    }
-
-    .intro-loader-line {
-      width: 92px;
-      height: 1px;
-      margin-top: 86px;
-      overflow: hidden;
-      background: rgba(210,174,98,.15);
-      opacity: 0;
-      transform: scaleX(.55);
-      transform-origin: center;
-      animation: introLineIn .38s .71s cubic-bezier(.19,1,.22,1) both;
-    }
-
-    .intro-loader-line span {
-      display: block;
-      width: 100%;
-      height: 100%;
-      background: var(--gold);
-      transform: translateX(-100%);
-      animation: loaderLine .48s .74s cubic-bezier(.19,1,.22,1) both;
-    }
-
-    @keyframes introStage {
-      0% {
+      .intro-loader {
+        visibility: hidden;
         opacity: 0;
-        transform: translateY(10px) scale(.99);
-      }
-      18% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-      72% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-      100% {
-        opacity: 0;
-        transform: translateY(-6px) scale(1.005);
-      }
-    }
-
-    @keyframes introLineIn {
-      from { opacity: 0; transform: scaleX(.55); }
-      to   { opacity: .9; transform: scaleX(1); }
-    }
-
-    @keyframes loaderLine {
-      from { transform: translateX(-100%); }
-      to   { transform: translateX(0); }
-    }
-
-    .opening-inner { opacity: 1; transform: none; }
-
-    .opening-inner.reveal {
-      opacity: 1;
-      transform: none;
-      transition: opacity .42s cubic-bezier(.19,1,.22,1),
-                  transform .42s cubic-bezier(.19,1,.22,1);
-    }
-
-    .opening-inner.reveal.intro-settle {
-      animation: openingSettle .48s cubic-bezier(.19,1,.22,1) both;
-    }
-
-    @keyframes openingSettle {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* One restrained chapter rule per major section.
-       The rule provides the pause; the section index carries the label. */
-    .section > .site-shell > .section-intro::before {
-      content: "";
-      display: block;
-      width: min(570px, 70vw);
-      height: 1px;
-      margin: 0 auto 40px;
-      background: linear-gradient(
-        to right,
-        transparent,
-        rgba(210,174,98,.12) 18%,
-        rgba(210,174,98,.48) 50%,
-        rgba(210,174,98,.12) 82%,
-        transparent
-      );
-      transform: scaleX(.42);
-      transform-origin: center;
-      opacity: .72;
-      transition:
-        transform .48s cubic-bezier(.19,1,.22,1),
-        opacity .48s ease;
-    }
-
-    .section > .site-shell > .section-intro.visible::before {
-      transform: scaleX(1);
-      opacity: .9;
-    }
-
-    /* ----------------------------------------------------------
-       Performance pass
-       The scroll path stays almost entirely native/compositor work.
-    ---------------------------------------------------------- */
-    .photo img {
-      display: block;
-      transform: none;
-      backface-visibility: visible;
-      -webkit-backface-visibility: visible;
-      filter: none;
-      opacity: .955;
-      will-change: auto;
-      contain: none;
-      image-rendering: auto;
-    }
-
-    .section,
-    .closing {
-      content-visibility: visible;
-      contain: none;
-    }
-
-    .grain {
-      mix-blend-mode: normal;
-      opacity: .012;
-    }
-
-    .topbar {
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-      background: rgba(6,6,6,.94);
-    }
-
-    .reveal {
-      transition:
-        opacity .34s cubic-bezier(.19,1,.22,1),
-        transform .34s cubic-bezier(.19,1,.22,1);
-    }
-
-    /* Give the editorial introduction and the image field distinct stages. */
-    .section > .site-shell > .section-intro {
-      margin-bottom: 112px;
-    }
-
-    .section + .section {
-      padding-top: 158px;
-    }
-
-    /* The smaller collections need the same breathing room. */
-    #more .mini-wrap > .section-intro {
-      margin-top: 132px !important;
-      margin-bottom: 54px !important;
-    }
-
-    #more .mini-wrap > .section-intro:first-child {
-      margin-top: 0 !important;
-    }
-
-    /* Slightly more space after the preceding gallery before the next chapter. */
-    .section + .section > .site-shell > .section-intro {
-      margin-top: 0;
-    }
-
-    @media (max-width: 960px) {
-      .section {
-        padding-top: 132px;
       }
 
-      .section + .section {
-        padding-top: 146px;
-      }
-
-      .section > .site-shell > .section-intro {
-        margin-bottom: 92px;
-      }
-    }
-
-    @media (max-width: 680px) {
-      .section {
-        padding-top: 105px;
-      }
-
-      .section + .section {
-        padding-top: 118px;
-      }
-
-      .section > .site-shell > .section-intro {
-        margin-bottom: 70px;
-      }
-
-      #more .mini-wrap > .section-intro {
-        margin-top: 105px !important;
-        margin-bottom: 42px !important;
-      }
-
-      .intro-loader-line {
-        margin-top: 73px;
+      .opening-inner,
+      .photo,
+      .section-intro::before {
+        opacity: 1 !important;
+        transform: none !important;
       }
     }
 
@@ -1408,41 +1270,48 @@
   <script>
     (() => {
       const items = [...document.querySelectorAll(".photo")];
+      const images = items.map(item => item.querySelector("img")).filter(Boolean);
       const lightbox = document.getElementById("lightbox");
-      const image = document.getElementById("lightboxImage");
-      const caption = document.getElementById("lightboxCaption");
-      const close = document.getElementById("lightboxClose");
-      const prev = document.getElementById("lightboxPrev");
-      const next = document.getElementById("lightboxNext");
-      let current = 0;
-      let lastFocused = null;
+      const lightboxImage = document.getElementById("lightboxImage");
+      const lightboxCaption = document.getElementById("lightboxCaption");
+      const closeButton = document.getElementById("lightboxClose");
+      const prevButton = document.getElementById("lightboxPrev");
+      const nextButton = document.getElementById("lightboxNext");
+      const introLoader = document.getElementById("introLoader");
+      const openingInner = document.querySelector(".opening-inner");
 
       document.getElementById("year").textContent = new Date().getFullYear();
 
-      function setPhoto(index) {
-        current = (index + items.length) % items.length;
-        const source = items[current].querySelector("img");
-        const label = items[current].querySelector(".photo-label");
+      /* -------------------------------------------------------------
+         Lightbox
+      ------------------------------------------------------------- */
+      let currentIndex = 0;
+      let lastFocused = null;
 
-        image.src = source.currentSrc || source.src;
-        image.alt = source.alt;
-        caption.textContent = label ? label.textContent : "";
+      function setLightboxPhoto(index) {
+        currentIndex = (index + items.length) % items.length;
+        const source = items[currentIndex].querySelector("img");
+        const label = items[currentIndex].querySelector(".photo-label");
+
+        lightboxImage.src = source.currentSrc || source.src;
+        lightboxImage.alt = source.alt;
+        lightboxCaption.textContent = label ? label.textContent : "";
       }
 
-      function openViewer(index) {
+      function openLightbox(index) {
         lastFocused = document.activeElement;
-        setPhoto(index);
+        setLightboxPhoto(index);
         lightbox.classList.add("active");
         lightbox.setAttribute("aria-hidden", "false");
         document.body.classList.add("is-viewing");
-        close.focus();
+        closeButton.focus();
       }
 
-      function closeViewer() {
+      function closeLightbox() {
         lightbox.classList.remove("active");
         lightbox.setAttribute("aria-hidden", "true");
         document.body.classList.remove("is-viewing");
-        image.removeAttribute("src");
+        lightboxImage.removeAttribute("src");
 
         if (lastFocused && typeof lastFocused.focus === "function") {
           lastFocused.focus();
@@ -1454,82 +1323,144 @@
         item.setAttribute("role", "button");
         item.setAttribute("aria-label", "Open " + item.querySelector("img").alt);
 
-        item.addEventListener("click", () => openViewer(index));
+        item.addEventListener("click", () => openLightbox(index));
         item.addEventListener("keydown", event => {
           if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
-            openViewer(index);
+            openLightbox(index);
           }
         });
       });
 
-      close.addEventListener("click", closeViewer);
-      prev.addEventListener("click", () => setPhoto(current - 1));
-      next.addEventListener("click", () => setPhoto(current + 1));
+      closeButton.addEventListener("click", closeLightbox);
+      prevButton.addEventListener("click", () => setLightboxPhoto(currentIndex - 1));
+      nextButton.addEventListener("click", () => setLightboxPhoto(currentIndex + 1));
 
       lightbox.addEventListener("click", event => {
-        if (event.target === lightbox) closeViewer();
+        if (event.target === lightbox) closeLightbox();
       });
 
       document.addEventListener("keydown", event => {
         if (!lightbox.classList.contains("active")) return;
-
-        if (event.key === "Escape") closeViewer();
-        if (event.key === "ArrowLeft") setPhoto(current - 1);
-        if (event.key === "ArrowRight") setPhoto(current + 1);
+        if (event.key === "Escape") closeLightbox();
+        if (event.key === "ArrowLeft") setLightboxPhoto(currentIndex - 1);
+        if (event.key === "ArrowRight") setLightboxPhoto(currentIndex + 1);
       });
 
-      // Lightweight reveal system for the opening/chapter typography.
-      // Photographs are intentionally excluded so scrolling never waits on JS
-      // animation work.
-      const revealElements = [...document.querySelectorAll(".reveal:not(.photo)")];
-      const openingInner = document.querySelector(".opening-inner");
+      /* -------------------------------------------------------------
+         Chapter reveals
+      ------------------------------------------------------------- */
+      const introBlocks = [...document.querySelectorAll(".section-intro")];
 
-      if (openingInner) {
-        requestAnimationFrame(() => {
-          openingInner.classList.add("intro-settle");
-          openingInner.classList.add("visible");
+      const chapterObserver = "IntersectionObserver" in window
+        ? new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            });
+          }, {
+            rootMargin: "700px 0px 700px 0px",
+            threshold: 0
+          })
+        : null;
+
+      introBlocks.forEach(block => {
+        if (chapterObserver) chapterObserver.observe(block);
+        else block.classList.add("is-visible");
+      });
+
+      /* -------------------------------------------------------------
+         Chunked visual reveal
+         -------------------------------------------------------------
+         The archive is still one document, but photos are revealed in
+         small groups. The browser can download them in the background;
+         the screen only has to animate a modest number of nodes at once.
+      ------------------------------------------------------------- */
+      const chunkGroups = [];
+
+      document.querySelectorAll(".masonry").forEach(gallery => {
+        const groupSize = gallery.classList.contains("art") ? 12 : 9;
+        const galleryItems = [...gallery.querySelectorAll(".photo")];
+
+        for (let start = 0; start < galleryItems.length; start += groupSize) {
+          const group = galleryItems.slice(start, start + groupSize);
+          const id = chunkGroups.length;
+          group.forEach((item, offset) => {
+            item.dataset.chunk = String(id);
+            item.dataset.chunkOffset = String(offset);
+          });
+          chunkGroups.push({ id, items: group });
+        }
+      });
+
+      document.querySelectorAll(".mini-grid").forEach(gallery => {
+        const galleryItems = [...gallery.querySelectorAll(".photo")];
+
+        for (let start = 0; start < galleryItems.length; start += 4) {
+          const group = galleryItems.slice(start, start + 4);
+          const id = chunkGroups.length;
+          group.forEach((item, offset) => {
+            item.dataset.chunk = String(id);
+            item.dataset.chunkOffset = String(offset);
+          });
+          chunkGroups.push({ id, items: group });
+        }
+      });
+
+      const standaloneTwoUp = document.querySelectorAll(".two-up .photo");
+      standaloneTwoUp.forEach((item, offset) => {
+        item.dataset.chunk = String(chunkGroups.length);
+        item.dataset.chunkOffset = String(offset);
+      });
+
+      if (standaloneTwoUp.length) {
+        chunkGroups.push({
+          id: chunkGroups.length,
+          items: [...standaloneTwoUp]
         });
       }
 
-      const revealObserver =
-        "IntersectionObserver" in window
-          ? new IntersectionObserver((entries, observer) => {
-              entries.forEach(entry => {
-                if (!entry.isIntersecting) return;
-                entry.target.classList.add("visible");
-                observer.unobserve(entry.target);
-              });
-            }, {
-              rootMargin: "600px 0px 600px 0px",
-              threshold: 0
-            })
-          : null;
-
-      if (revealObserver) {
-        revealElements.forEach(el => {
-          if (el === openingInner) return;
-          revealObserver.observe(el);
+      function revealChunk(group) {
+        group.items.forEach((item, index) => {
+          window.setTimeout(() => item.classList.add("chunk-visible"), index * 20);
         });
-      } else {
-        revealElements.forEach(el => el.classList.add("visible"));
       }
 
-      /*
-       * ARCHIVE-WIDE IMAGE PIPELINE
-       *
-       * The entire archive is known in advance. Start requesting it immediately
-       * while the opening sequence is playing, but keep concurrency bounded so
-       * the browser does not become CPU/network saturated.
-       */
-      const photoImages = [...document.querySelectorAll(".photo img")];
-      const totalPhotos = photoImages.length;
-      const prefetchQueue = [];
-      const queued = new Uint8Array(totalPhotos);
-      const completed = new Uint8Array(totalPhotos);
-      const probes = new Array(totalPhotos);
-      let activePrefetches = 0;
+      const chunkObserver = "IntersectionObserver" in window
+        ? new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+              if (!entry.isIntersecting) return;
+              const index = Number(entry.target.dataset.chunkTrigger);
+              const group = chunkGroups[index];
+              if (!group) return;
+              revealChunk(group);
+              observer.unobserve(entry.target);
+            });
+          }, {
+            rootMargin: "850px 0px 850px 0px",
+            threshold: 0
+          })
+        : null;
 
+      chunkGroups.forEach(group => {
+        const trigger = group.items[0];
+        trigger.dataset.chunkTrigger = String(group.id);
+
+        if (chunkObserver) {
+          chunkObserver.observe(trigger);
+        } else {
+          revealChunk(group);
+        }
+      });
+
+      /* -------------------------------------------------------------
+         Archive prefetch queue
+         -------------------------------------------------------------
+         Start immediately. The page knows all filenames, so we can
+         quietly request the whole archive without creating a 104-request
+         burst. The queue always keeps a few transfers moving.
+      ------------------------------------------------------------- */
       const connection =
         navigator.connection ||
         navigator.mozConnection ||
@@ -1537,163 +1468,176 @@
 
       const saveData = Boolean(connection && connection.saveData);
       const effectiveType = connection && connection.effectiveType;
-      const isSlowNetwork =
+      const slowNetwork =
         effectiveType === "slow-2g" ||
         effectiveType === "2g";
 
-      // Typical desktop: keep eight image transfers moving at once.
-      // Slower / save-data connections get a gentler queue.
-      const MAX_ACTIVE = saveData ? 2 : (isSlowNetwork ? 3 : 8);
-      const INITIAL_BATCH = saveData ? 8 : (isSlowNetwork ? 14 : totalPhotos);
+      const maxActive = saveData ? 2 : (slowNetwork ? 4 : 9);
+      const queue = [];
+      const queued = new Uint8Array(images.length);
+      const done = new Uint8Array(images.length);
+      let active = 0;
 
-      function enqueuePrefetch(index, priority = "low") {
-        if (index < 0 || index >= totalPhotos) return;
-        if (queued[index] || completed[index]) return;
+      // The first visual chapter gets the first seats in the queue.
+      const priorityOrder = [
+        ...Array.from({length: Math.min(18, images.length)}, (_, i) => i),
+        ...Array.from({length: images.length}, (_, i) => i)
+          .filter(i => i >= 18)
+      ];
 
-        queued[index] = 1;
-        prefetchQueue.push({ index, priority });
+      priorityOrder.forEach((index, order) => {
+        queue.push({
+          index,
+          priority: order < 18 ? 0 : 1
+        });
+      });
 
-        // High-priority items move to the front without repeatedly sorting
-        // a large queue.
-        if (priority === "high") {
-          prefetchQueue.sort((a, b) =>
-            a.priority === b.priority ? a.index - b.index : (a.priority === "high" ? -1 : 1)
-          );
-        }
+      function prefetchNext() {
+        if (active >= maxActive || queue.length === 0) return;
 
-        pumpPrefetchQueue();
-      }
+        queue.sort((a, b) => a.priority - b.priority || a.index - b.index);
 
-      function pumpPrefetchQueue() {
-        while (activePrefetches < MAX_ACTIVE && prefetchQueue.length) {
-          const job = prefetchQueue.shift();
-          const source = photoImages[job.index];
-          if (!source) continue;
+        while (active < maxActive && queue.length) {
+          const job = queue.shift();
+          if (queued[job.index] || done[job.index]) continue;
 
-          activePrefetches++;
+          queued[job.index] = 1;
+          active++;
 
           const probe = new Image();
-          probes[job.index] = probe;
           probe.decoding = "async";
 
           if ("fetchPriority" in probe) {
-            probe.fetchPriority = job.priority;
+            probe.fetchPriority = job.priority === 0 ? "high" : "low";
           }
 
           const finish = () => {
-            activePrefetches--;
-            completed[job.index] = 1;
-
-            // Ask the browser to decode the already-downloaded probe when possible.
-            // The decoded image remains available to the browser's image cache.
-            if (probe.complete && probe.naturalWidth > 0 && "decode" in probe) {
-              probe.decode().catch(() => {});
-            }
-
-            pumpPrefetchQueue();
+            active--;
+            done[job.index] = 1;
+            prefetchNext();
           };
 
-          probe.addEventListener("load", finish, { once: true });
-          probe.addEventListener("error", finish, { once: true });
-
-          // Setting src is the actual network request.
-          probe.src = source.currentSrc || source.src;
+          probe.addEventListener("load", finish, {once: true});
+          probe.addEventListener("error", finish, {once: true});
+          probe.src = images[job.index].currentSrc || images[job.index].src;
         }
       }
 
-      function enqueueRange(start, end, priority = "low") {
-        const first = Math.max(0, start);
-        const last = Math.min(totalPhotos - 1, end);
+      prefetchNext();
 
-        for (let i = first; i <= last; i++) {
-          enqueuePrefetch(i, priority);
-        }
+      /* -------------------------------------------------------------
+         Give the browser idle time to decode only what is about to be
+         visible. We never decode the whole archive in one burst.
+      ------------------------------------------------------------- */
+      const decodeQueue = [];
+      const decodeSeen = new Set();
+
+      function queueDecode(img) {
+        if (!img || decodeSeen.has(img)) return;
+        decodeSeen.add(img);
+        decodeQueue.push(img);
+        pumpDecode();
       }
 
-      // Start the archive immediately. The opening animation is now useful time:
-      // while the visitor sees P.B. → Pearl Bipin → A personal archive,
-      // the browser is already requesting the photograph archive.
-      if (saveData || isSlowNetwork) {
-        enqueueRange(0, INITIAL_BATCH - 1, "high");
-        enqueueRange(INITIAL_BATCH, totalPhotos - 1, "low");
-      } else {
-        enqueueRange(0, totalPhotos - 1, "low");
-        enqueueRange(0, Math.min(11, totalPhotos - 1), "high");
-      }
+      let decodeBusy = false;
 
-      // Use the visitor's linear movement as a secondary priority signal.
-      // This never waits for scrolling; it simply promotes nearby images.
-      if ("IntersectionObserver" in window) {
-        const linearObserver = new IntersectionObserver((entries) => {
-          for (const entry of entries) {
-            if (!entry.isIntersecting) continue;
+      function pumpDecode() {
+        if (decodeBusy || decodeQueue.length === 0) return;
+        decodeBusy = true;
 
-            const index = Number(entry.target.dataset.photoIndex);
-            if (!Number.isFinite(index)) continue;
+        const img = decodeQueue.shift();
 
-            // Promote a generous forward window when the visitor gets here.
-            for (let i = index; i <= Math.min(totalPhotos - 1, index + 14); i++) {
-              enqueuePrefetch(i, i <= index + 5 ? "high" : "low");
+        const finish = () => {
+          decodeBusy = false;
+          if (decodeQueue.length) {
+            if ("requestIdleCallback" in window) {
+              requestIdleCallback(pumpDecode, {timeout: 700});
+            } else {
+              setTimeout(pumpDecode, 60);
             }
           }
-        }, {
-          rootMargin: "2600px 0px 2600px 0px",
-          threshold: 0
-        });
+        };
 
-        photoImages.forEach((img, index) => {
-          img.dataset.photoIndex = index;
-          linearObserver.observe(img);
-        });
-      }
-
-      // Let the DOM images use the normal browser loader semantics, but
-      // explicitly mark them async for decoding.
-      photoImages.forEach(img => {
-        img.decoding = "async";
-      });
-
-      // Keep an intentionally small decode budget on idle periods so that
-      // scrolling does not suddenly trigger a large decode burst.
-      let nextDecodeIndex = 0;
-
-      function decodeNextIdleChunk() {
-        const chunkSize = saveData ? 1 : (isSlowNetwork ? 1 : 3);
-        let decodedThisRound = 0;
-
-        while (nextDecodeIndex < totalPhotos && decodedThisRound < chunkSize) {
-          const img = photoImages[nextDecodeIndex++];
-          decodedThisRound++;
-
-          if ("decode" in img) {
-            img.decode().catch(() => {});
-          }
-        }
-
-        if (nextDecodeIndex < totalPhotos) {
-          if ("requestIdleCallback" in window) {
-            requestIdleCallback(decodeNextIdleChunk, { timeout: 1200 });
-          } else {
-            window.setTimeout(decodeNextIdleChunk, 220);
-          }
+        if ("decode" in img && img.complete && img.naturalWidth > 0) {
+          img.decode().catch(() => {}).finally(finish);
+        } else {
+          finish();
         }
       }
 
-      if ("requestIdleCallback" in window) {
-        requestIdleCallback(decodeNextIdleChunk, { timeout: 900 });
-      } else {
-        window.setTimeout(decodeNextIdleChunk, 260);
+      const decodeObserver = "IntersectionObserver" in window
+        ? new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+              if (!entry.isIntersecting) return;
+              const groupIndex = Number(entry.target.dataset.chunk);
+              const group = chunkGroups[groupIndex];
+              if (!group) return;
+
+              // A few images at a time: enough to reduce decode-on-scroll
+              // without creating a main-thread spike.
+              group.items.slice(0, 4).forEach(item => queueDecode(item.querySelector("img")));
+            });
+          }, {
+            rootMargin: "1100px 0px 1100px 0px",
+            threshold: 0
+          })
+        : null;
+
+      if (decodeObserver) {
+        chunkGroups.forEach(group => {
+          group.items.slice(0, 1).forEach(item => decodeObserver.observe(item));
+        });
       }
 
-      // Short but purposeful opening sequence.
-      // Short opening animation. The first prefetch wave starts immediately;
-      // the page never waits on the network before becoming interactive.
-      const introLoader = document.getElementById("introLoader");
+      /* -------------------------------------------------------------
+         Purposeful opening sequence
+         ------------------------------------------------------------- */
+      openingInner?.classList.add("is-ready");
 
+      const loaderStarted = performance.now();
+
+      // Keep the opening long enough to be an elegant identity sequence,
+      // while allowing a quicker exit when the first visual batch is already
+      // ready. Hard ceiling prevents slow networks from trapping the visitor.
+      let firstBatchReady = false;
+
+      const firstBatchCheck = window.setInterval(() => {
+        const first = images.slice(0, Math.min(9, images.length));
+        firstBatchReady = first.every(img => {
+          const src = img.currentSrc || img.src;
+          return src && (img.complete && img.naturalWidth > 0);
+        }) || first.slice(0, 3).every(img => {
+          const src = img.currentSrc || img.src;
+          return src && (img.complete && img.naturalWidth > 0);
+        });
+      }, 80);
+
+      const releaseOpening = () => {
+        if (!introLoader) return;
+        window.clearInterval(firstBatchCheck);
+
+        const elapsed = performance.now() - loaderStarted;
+        const minimum = 2650;
+        const ceiling = 4100;
+        const waitMore = Math.max(0, Math.min(minimum - elapsed, ceiling - elapsed));
+
+        window.setTimeout(() => {
+          introLoader.classList.add("done");
+        }, waitMore);
+      };
+
+      // The animation itself carries roughly 3 seconds. If the first photos
+      // become ready sooner, we still keep the full editorial cadence.
       window.setTimeout(() => {
-        introLoader.classList.add("done");
-      }, saveData ? 820 : 1220);
+        if (firstBatchReady || performance.now() - loaderStarted >= 3000) {
+          releaseOpening();
+        }
+      }, 3000);
+
+      // Absolute maximum, even on a poor connection.
+      window.setTimeout(releaseOpening, 4200);
     })();
+
   </script>
 </body>
 </html>
