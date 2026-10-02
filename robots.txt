@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pearlbipinphotos.vercel.app/sitemap.xml
