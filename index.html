@@ -15,8 +15,17 @@
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 
   <link rel="canonical" href="https://pearlbipinphotos.vercel.app/">
-  <link rel="icon" type="image/png" href="OSQNB.png">
-  <link rel="apple-touch-icon" href="OSQNB.png">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CjxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgcng9IjE0IiBmaWxsPSIjMDYwNjA2Ii8+CjxwYXRoIGQ9Ik0yMCA0OVYxNWgxNC4yQzQ0LjYgMTUgNTAgMTkuNyA1MCAyNi44cy01LjQgMTEuOC0xNS44IDExLjhIMjciCiAgICAgIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2QyYWU2MiIgc3Ryb2tlLXdpZHRoPSI1LjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8cGF0aCBkPSJNMjcgMzguNlY0OSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZDJhZTYyIiBzdHJva2Utd2lkdGg9IjUuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPg==">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap">
+  <link rel="preload" as="image" href="Photos/P1.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="Photos/P2.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="Photos/P3.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="Photos/P4.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="Photos/P5.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="Photos/P6.jpg" fetchpriority="high">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Pearl Bipin Photos">
@@ -67,8 +76,6 @@
   </script>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap');
-
     :root {
       --black: #060606;
       --black-2: #0b0b0b;
@@ -302,7 +309,7 @@
     }
 
     .section {
-      padding: 132px 0;
+      padding: 118px 0;
     }
 
     .section + .section {
@@ -311,7 +318,7 @@
 
     .section-intro {
       width: min(700px, 100%);
-      margin: 0 auto 82px;
+      margin: 0 auto 68px;
       text-align: center;
     }
 
@@ -380,15 +387,17 @@
       transition: opacity .3s ease;
     }
 
-    .photo:hover img,
-    .photo:focus-visible img {
-      transform: scale(1.022);
-      opacity: 1;
-    }
+    @media (hover: hover) {
+      .photo:hover img,
+      .photo:focus-visible img {
+        transform: scale(1.022);
+        opacity: 1;
+      }
 
-    .photo:hover::after,
-    .photo:focus-visible::after {
-      opacity: 1;
+      .photo:hover::after,
+      .photo:focus-visible::after {
+        opacity: 1;
+      }
     }
 
     .photo-label {
@@ -775,6 +784,14 @@
       }
     }
 
+
+    @media (max-width: 680px) {
+      .section > .site-shell > .section-intro::before {
+        width: min(420px, 78vw);
+        margin-bottom: 30px;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .intro-loader-mark,
       .intro-loader-line span {
@@ -845,7 +862,7 @@
       align-content: center;
       gap: 22px;
       background: var(--black);
-      transition: opacity .8s cubic-bezier(.19,1,.22,1), visibility .8s ease;
+      transition: opacity .34s cubic-bezier(.19,1,.22,1), visibility .34s ease;
     }
 
     .intro-loader.done {
@@ -862,7 +879,7 @@
       letter-spacing: .03em;
       opacity: 0;
       transform: translateY(8px);
-      animation: loaderMark 1s .08s cubic-bezier(.19,1,.22,1) forwards;
+      animation: loaderMark .55s .05s cubic-bezier(.19,1,.22,1) forwards;
     }
 
     .intro-loader-line {
@@ -878,7 +895,7 @@
       height: 100%;
       background: var(--gold);
       transform: translateX(-100%);
-      animation: loaderLine 1.05s .12s cubic-bezier(.19,1,.22,1) forwards;
+      animation: loaderLine .62s .08s cubic-bezier(.19,1,.22,1) forwards;
     }
 
     @keyframes loaderMark {
@@ -893,42 +910,94 @@
       to { opacity: 0; transform: translateY(-7px); }
     }
 
-    /* Perceived-performance polish: images resolve softly instead of popping in. */
+    /* ----------------------------------------------------------
+       Performance pass
+       Keep the scroll path light. The page's motion lives in the
+       typography/interludes; photographs should paint immediately.
+    ---------------------------------------------------------- */
     .photo img {
-      transform: translateZ(0);
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-      will-change: transform, opacity, filter;
-      filter: blur(3px);
-      opacity: .45;
-    }
-
-    .photo img.is-loaded {
-      filter: blur(0);
+      display: block;
+      transform: none;
+      backface-visibility: visible;
+      -webkit-backface-visibility: visible;
+      filter: none;
       opacity: .955;
+      will-change: auto;
+      contain: paint;
     }
 
-    .photo:hover img,
-    .photo:focus-visible img {
-      will-change: transform;
-    }
-
-    /* Keep sections composited and avoid doing unnecessary work while far away. */
     .section,
     .closing {
-      content-visibility: auto;
-      contain-intrinsic-size: 850px;
+      content-visibility: visible;
+      contain: none;
     }
 
-    /* Slightly smoother native scrolling without hijacking wheel/touch input. */
-    html {
-      scroll-padding-top: 20px;
-      overscroll-behavior-x: none;
-      -webkit-overflow-scrolling: touch;
+    .grain {
+      mix-blend-mode: normal;
+      opacity: .018;
     }
 
-    .opening {
-      scroll-margin-top: 0;
+    .topbar {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      background: rgba(6,6,6,.94);
+    }
+
+    .reveal {
+      transition:
+        opacity .38s cubic-bezier(.19,1,.22,1),
+        transform .38s cubic-bezier(.19,1,.22,1);
+    }
+
+
+    .opening-inner { opacity: 1; transform: none; }
+
+
+    /* The opening is the first thing the visitor should see immediately. */
+    .opening-inner.reveal {
+      opacity: 1;
+      transform: none;
+      transition: opacity .42s cubic-bezier(.19,1,.22,1),
+                  transform .42s cubic-bezier(.19,1,.22,1);
+    }
+
+    .opening-inner.reveal.intro-settle {
+      animation: openingSettle .48s cubic-bezier(.19,1,.22,1) both;
+    }
+
+    @keyframes openingSettle {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+
+    /* One restrained chapter rule per major section.
+       The section's own index carries the text; the rule supplies the visual pause. */
+    .section > .site-shell > .section-intro::before {
+      content: "";
+      display: block;
+      width: min(570px, 70vw);
+      height: 1px;
+      margin: 0 auto 36px;
+      background: linear-gradient(
+        to right,
+        transparent,
+        rgba(210,174,98,.12) 18%,
+        rgba(210,174,98,.48) 50%,
+        rgba(210,174,98,.12) 82%,
+        transparent
+      );
+      transform: scaleX(.42);
+      transform-origin: center;
+      opacity: .72;
+      transition:
+        transform .58s cubic-bezier(.19,1,.22,1),
+        opacity .58s ease;
+    }
+
+    .section > .site-shell > .section-intro.visible::before {
+      transform: scaleX(1);
+      opacity: .9;
     }
 
   </style>
@@ -992,49 +1061,48 @@
         </div>
 
         <div class="masonry" aria-label="Personal photographs of Pearl Bipin">
-          <figure class="photo reveal">
-            <img src="Photos/P1.jpg" alt="Pearl Bipin — personal photograph P1" loading="eager" fetchpriority="high" decoding="async">
+          <figure class="photo">
+            <img src="Photos/P1.jpg" loading="eager" fetchpriority="high" decoding="async" alt="Pearl Bipin — personal photograph P1">
             <span class="photo-label">P1</span>
           </figure>
-          <figure class="photo reveal"><img src="Photos/P2.jpg" fetchpriority="high" alt="Pearl Bipin — personal photograph P2" loading="lazy" decoding="async"><span class="photo-label">P2</span></figure>
-          <figure class="photo reveal"><img src="Photos/P3.jpg" fetchpriority="high" alt="Pearl Bipin — personal photograph P3" loading="lazy" decoding="async"><span class="photo-label">P3</span></figure>
-          <figure class="photo reveal"><img src="Photos/P4.jpg" alt="Pearl Bipin — personal photograph P4" loading="lazy" decoding="async"><span class="photo-label">P4</span></figure>
-          <figure class="photo reveal"><img src="Photos/P5.jpg" alt="Pearl Bipin — personal photograph P5" loading="lazy" decoding="async"><span class="photo-label">P5</span></figure>
-          <figure class="photo reveal"><img src="Photos/P6.jpg" alt="Pearl Bipin — personal photograph P6" loading="lazy" decoding="async"><span class="photo-label">P6</span></figure>
-          <figure class="photo reveal"><img src="Photos/P7.jpg" alt="Pearl Bipin — personal photograph P7" loading="lazy" decoding="async"><span class="photo-label">P7</span></figure>
-          <figure class="photo reveal"><img src="Photos/P8.jpg" alt="Pearl Bipin — personal photograph P8" loading="lazy" decoding="async"><span class="photo-label">P8</span></figure>
-          <figure class="photo reveal"><img src="Photos/P9.jpg" alt="Pearl Bipin — personal photograph P9" loading="lazy" decoding="async"><span class="photo-label">P9</span></figure>
-          <figure class="photo reveal"><img src="Photos/P10.jpg" alt="Pearl Bipin — personal photograph P10" loading="lazy" decoding="async"><span class="photo-label">P10</span></figure>
-          <figure class="photo reveal"><img src="Photos/P11.jpg" alt="Pearl Bipin — personal photograph P11" loading="lazy" decoding="async"><span class="photo-label">P11</span></figure>
-          <figure class="photo reveal"><img src="Photos/P12.jpg" alt="Pearl Bipin — personal photograph P12" loading="lazy" decoding="async"><span class="photo-label">P12</span></figure>
-          <figure class="photo reveal"><img src="Photos/P13.jpg" alt="Pearl Bipin — personal photograph P13" loading="lazy" decoding="async"><span class="photo-label">P13</span></figure>
-          <figure class="photo reveal"><img src="Photos/P14.jpg" alt="Pearl Bipin — personal photograph P14" loading="lazy" decoding="async"><span class="photo-label">P14</span></figure>
-          <figure class="photo reveal"><img src="Photos/P15.jpg" alt="Pearl Bipin — personal photograph P15" loading="lazy" decoding="async"><span class="photo-label">P15</span></figure>
-          <figure class="photo reveal"><img src="Photos/P16.jpg" alt="Pearl Bipin — personal photograph P16" loading="lazy" decoding="async"><span class="photo-label">P16</span></figure>
-          <figure class="photo reveal"><img src="Photos/P17.jpg" alt="Pearl Bipin — personal photograph P17" loading="lazy" decoding="async"><span class="photo-label">P17</span></figure>
-          <figure class="photo reveal"><img src="Photos/P18.jpg" alt="Pearl Bipin — personal photograph P18" loading="lazy" decoding="async"><span class="photo-label">P18</span></figure>
-          <figure class="photo reveal"><img src="Photos/P19.jpg" alt="Pearl Bipin — personal photograph P19" loading="lazy" decoding="async"><span class="photo-label">P19</span></figure>
-          <figure class="photo reveal"><img src="Photos/P20.jpg" alt="Pearl Bipin — personal photograph P20" loading="lazy" decoding="async"><span class="photo-label">P20</span></figure>
-          <figure class="photo reveal"><img src="Photos/P21.jpg" alt="Pearl Bipin — personal photograph P21" loading="lazy" decoding="async"><span class="photo-label">P21</span></figure>
-          <figure class="photo reveal"><img src="Photos/P22.jpg" alt="Pearl Bipin — personal photograph P22" loading="lazy" decoding="async"><span class="photo-label">P22</span></figure>
-          <figure class="photo reveal"><img src="Photos/P23.jpg" alt="Pearl Bipin — personal photograph P23" loading="lazy" decoding="async"><span class="photo-label">P23</span></figure>
-          <figure class="photo reveal"><img src="Photos/P24.jpg" alt="Pearl Bipin — personal photograph P24" loading="lazy" decoding="async"><span class="photo-label">P24</span></figure>
-          <figure class="photo reveal"><img src="Photos/P25.jpg" alt="Pearl Bipin — personal photograph P25" loading="lazy" decoding="async"><span class="photo-label">P25</span></figure>
-          <figure class="photo reveal"><img src="Photos/P26.jpg" alt="Pearl Bipin — personal photograph P26" loading="lazy" decoding="async"><span class="photo-label">P26</span></figure>
-          <figure class="photo reveal"><img src="Photos/P27.jpg" alt="Pearl Bipin — personal photograph P27" loading="lazy" decoding="async"><span class="photo-label">P27</span></figure>
-          <figure class="photo reveal"><img src="Photos/P28.jpg" alt="Pearl Bipin — personal photograph P28" loading="lazy" decoding="async"><span class="photo-label">P28</span></figure>
-          <figure class="photo reveal"><img src="Photos/P29.jpg" alt="Pearl Bipin — personal photograph P29" loading="lazy" decoding="async"><span class="photo-label">P29</span></figure>
-          <figure class="photo reveal"><img src="Photos/P30.jpg" alt="Pearl Bipin — personal photograph P30" loading="lazy" decoding="async"><span class="photo-label">P30</span></figure>
-          <figure class="photo reveal"><img src="Photos/P31.JPG" alt="Pearl Bipin — personal photograph P31" loading="lazy" decoding="async"><span class="photo-label">P31</span></figure>
-          <figure class="photo reveal"><img src="Photos/P32.JPG" alt="Pearl Bipin — personal photograph P32" loading="lazy" decoding="async"><span class="photo-label">P32</span></figure>
-          <figure class="photo reveal"><img src="Photos/P33.JPG" alt="Pearl Bipin — personal photograph P33" loading="lazy" decoding="async"><span class="photo-label">P33</span></figure>
-          <figure class="photo reveal"><img src="Photos/P34.jpg" alt="Pearl Bipin — personal photograph P34" loading="lazy" decoding="async"><span class="photo-label">P34</span></figure>
-          <figure class="photo reveal"><img src="Photos/P35.JPG" alt="Pearl Bipin — personal photograph P35" loading="lazy" decoding="async"><span class="photo-label">P35</span></figure>
-          <figure class="photo reveal"><img src="Photos/P36.jpg" alt="Pearl Bipin — personal photograph P36" loading="lazy" decoding="async"><span class="photo-label">P36</span></figure>
+          <figure class="photo"><img src="Photos/P2.jpg" loading="eager" fetchpriority="high" decoding="async" alt="Pearl Bipin — personal photograph P2"><span class="photo-label">P2</span></figure>
+          <figure class="photo"><img src="Photos/P3.jpg" loading="eager" fetchpriority="high" decoding="async" alt="Pearl Bipin — personal photograph P3"><span class="photo-label">P3</span></figure>
+          <figure class="photo"><img src="Photos/P4.jpg" loading="eager" fetchpriority="high" decoding="async" alt="Pearl Bipin — personal photograph P4"><span class="photo-label">P4</span></figure>
+          <figure class="photo"><img src="Photos/P5.jpg" loading="eager" fetchpriority="high" decoding="async" alt="Pearl Bipin — personal photograph P5"><span class="photo-label">P5</span></figure>
+          <figure class="photo"><img src="Photos/P6.jpg" loading="eager" fetchpriority="high" decoding="async" alt="Pearl Bipin — personal photograph P6"><span class="photo-label">P6</span></figure>
+          <figure class="photo"><img src="Photos/P7.jpg" alt="Pearl Bipin — personal photograph P7" loading="lazy" decoding="async"><span class="photo-label">P7</span></figure>
+          <figure class="photo"><img src="Photos/P8.jpg" alt="Pearl Bipin — personal photograph P8" loading="lazy" decoding="async"><span class="photo-label">P8</span></figure>
+          <figure class="photo"><img src="Photos/P9.jpg" alt="Pearl Bipin — personal photograph P9" loading="lazy" decoding="async"><span class="photo-label">P9</span></figure>
+          <figure class="photo"><img src="Photos/P10.jpg" alt="Pearl Bipin — personal photograph P10" loading="lazy" decoding="async"><span class="photo-label">P10</span></figure>
+          <figure class="photo"><img src="Photos/P11.jpg" alt="Pearl Bipin — personal photograph P11" loading="lazy" decoding="async"><span class="photo-label">P11</span></figure>
+          <figure class="photo"><img src="Photos/P12.jpg" alt="Pearl Bipin — personal photograph P12" loading="lazy" decoding="async"><span class="photo-label">P12</span></figure>
+          <figure class="photo"><img src="Photos/P13.jpg" alt="Pearl Bipin — personal photograph P13" loading="lazy" decoding="async"><span class="photo-label">P13</span></figure>
+          <figure class="photo"><img src="Photos/P14.jpg" alt="Pearl Bipin — personal photograph P14" loading="lazy" decoding="async"><span class="photo-label">P14</span></figure>
+          <figure class="photo"><img src="Photos/P15.jpg" alt="Pearl Bipin — personal photograph P15" loading="lazy" decoding="async"><span class="photo-label">P15</span></figure>
+          <figure class="photo"><img src="Photos/P16.jpg" alt="Pearl Bipin — personal photograph P16" loading="lazy" decoding="async"><span class="photo-label">P16</span></figure>
+          <figure class="photo"><img src="Photos/P17.jpg" alt="Pearl Bipin — personal photograph P17" loading="lazy" decoding="async"><span class="photo-label">P17</span></figure>
+          <figure class="photo"><img src="Photos/P18.jpg" alt="Pearl Bipin — personal photograph P18" loading="lazy" decoding="async"><span class="photo-label">P18</span></figure>
+          <figure class="photo"><img src="Photos/P19.jpg" alt="Pearl Bipin — personal photograph P19" loading="lazy" decoding="async"><span class="photo-label">P19</span></figure>
+          <figure class="photo"><img src="Photos/P20.jpg" alt="Pearl Bipin — personal photograph P20" loading="lazy" decoding="async"><span class="photo-label">P20</span></figure>
+          <figure class="photo"><img src="Photos/P21.jpg" alt="Pearl Bipin — personal photograph P21" loading="lazy" decoding="async"><span class="photo-label">P21</span></figure>
+          <figure class="photo"><img src="Photos/P22.jpg" alt="Pearl Bipin — personal photograph P22" loading="lazy" decoding="async"><span class="photo-label">P22</span></figure>
+          <figure class="photo"><img src="Photos/P23.jpg" alt="Pearl Bipin — personal photograph P23" loading="lazy" decoding="async"><span class="photo-label">P23</span></figure>
+          <figure class="photo"><img src="Photos/P24.jpg" alt="Pearl Bipin — personal photograph P24" loading="lazy" decoding="async"><span class="photo-label">P24</span></figure>
+          <figure class="photo"><img src="Photos/P25.jpg" alt="Pearl Bipin — personal photograph P25" loading="lazy" decoding="async"><span class="photo-label">P25</span></figure>
+          <figure class="photo"><img src="Photos/P26.jpg" alt="Pearl Bipin — personal photograph P26" loading="lazy" decoding="async"><span class="photo-label">P26</span></figure>
+          <figure class="photo"><img src="Photos/P27.jpg" alt="Pearl Bipin — personal photograph P27" loading="lazy" decoding="async"><span class="photo-label">P27</span></figure>
+          <figure class="photo"><img src="Photos/P28.jpg" alt="Pearl Bipin — personal photograph P28" loading="lazy" decoding="async"><span class="photo-label">P28</span></figure>
+          <figure class="photo"><img src="Photos/P29.jpg" alt="Pearl Bipin — personal photograph P29" loading="lazy" decoding="async"><span class="photo-label">P29</span></figure>
+          <figure class="photo"><img src="Photos/P30.jpg" alt="Pearl Bipin — personal photograph P30" loading="lazy" decoding="async"><span class="photo-label">P30</span></figure>
+          <figure class="photo"><img src="Photos/P31.JPG" alt="Pearl Bipin — personal photograph P31" loading="lazy" decoding="async"><span class="photo-label">P31</span></figure>
+          <figure class="photo"><img src="Photos/P32.JPG" alt="Pearl Bipin — personal photograph P32" loading="lazy" decoding="async"><span class="photo-label">P32</span></figure>
+          <figure class="photo"><img src="Photos/P33.JPG" alt="Pearl Bipin — personal photograph P33" loading="lazy" decoding="async"><span class="photo-label">P33</span></figure>
+          <figure class="photo"><img src="Photos/P34.jpg" alt="Pearl Bipin — personal photograph P34" loading="lazy" decoding="async"><span class="photo-label">P34</span></figure>
+          <figure class="photo"><img src="Photos/P35.JPG" alt="Pearl Bipin — personal photograph P35" loading="lazy" decoding="async"><span class="photo-label">P35</span></figure>
+          <figure class="photo"><img src="Photos/P36.jpg" alt="Pearl Bipin — personal photograph P36" loading="lazy" decoding="async"><span class="photo-label">P36</span></figure>
         </div>
       </div>
     </section>
-
     <!-- ART -->
     <section class="section" id="artwork">
       <div class="site-shell">
@@ -1047,46 +1115,45 @@
         </div>
 
         <div class="masonry art" aria-label="Artwork by Pearl Bipin">
-          <figure class="photo reveal"><img src="Photos/A1.jpg" alt="Artwork by Pearl Bipin — A1" loading="lazy" decoding="async"><span class="photo-label">A1</span></figure>
-          <figure class="photo reveal"><img src="Photos/A2.jpg" alt="Artwork by Pearl Bipin — A2" loading="lazy" decoding="async"><span class="photo-label">A2</span></figure>
-          <figure class="photo reveal"><img src="Photos/A3.jpg" alt="Artwork by Pearl Bipin — A3" loading="lazy" decoding="async"><span class="photo-label">A3</span></figure>
-          <figure class="photo reveal"><img src="Photos/A4.jpg" alt="Artwork by Pearl Bipin — A4" loading="lazy" decoding="async"><span class="photo-label">A4</span></figure>
-          <figure class="photo reveal"><img src="Photos/A5.jpg" alt="Artwork by Pearl Bipin — A5" loading="lazy" decoding="async"><span class="photo-label">A5</span></figure>
-          <figure class="photo reveal"><img src="Photos/A6.jpg" alt="Artwork by Pearl Bipin — A6" loading="lazy" decoding="async"><span class="photo-label">A6</span></figure>
-          <figure class="photo reveal"><img src="Photos/A7.jpg" alt="Artwork by Pearl Bipin — A7" loading="lazy" decoding="async"><span class="photo-label">A7</span></figure>
-          <figure class="photo reveal"><img src="Photos/A8.jpg" alt="Artwork by Pearl Bipin — A8" loading="lazy" decoding="async"><span class="photo-label">A8</span></figure>
-          <figure class="photo reveal"><img src="Photos/A9.jpg" alt="Artwork by Pearl Bipin — A9" loading="lazy" decoding="async"><span class="photo-label">A9</span></figure>
-          <figure class="photo reveal"><img src="Photos/A10.jpg" alt="Artwork by Pearl Bipin — A10" loading="lazy" decoding="async"><span class="photo-label">A10</span></figure>
-          <figure class="photo reveal"><img src="Photos/A11.jpg" alt="Artwork by Pearl Bipin — A11" loading="lazy" decoding="async"><span class="photo-label">A11</span></figure>
-          <figure class="photo reveal"><img src="Photos/A12.jpg" alt="Artwork by Pearl Bipin — A12" loading="lazy" decoding="async"><span class="photo-label">A12</span></figure>
-          <figure class="photo reveal"><img src="Photos/A13.jpg" alt="Artwork by Pearl Bipin — A13" loading="lazy" decoding="async"><span class="photo-label">A13</span></figure>
-          <figure class="photo reveal"><img src="Photos/A14.jpg" alt="Artwork by Pearl Bipin — A14" loading="lazy" decoding="async"><span class="photo-label">A14</span></figure>
-          <figure class="photo reveal"><img src="Photos/A15.jpg" alt="Artwork by Pearl Bipin — A15" loading="lazy" decoding="async"><span class="photo-label">A15</span></figure>
-          <figure class="photo reveal"><img src="Photos/A16.jpg" alt="Artwork by Pearl Bipin — A16" loading="lazy" decoding="async"><span class="photo-label">A16</span></figure>
-          <figure class="photo reveal"><img src="Photos/A17.jpg" alt="Artwork by Pearl Bipin — A17" loading="lazy" decoding="async"><span class="photo-label">A17</span></figure>
-          <figure class="photo reveal"><img src="Photos/A18.jpg" alt="Artwork by Pearl Bipin — A18" loading="lazy" decoding="async"><span class="photo-label">A18</span></figure>
-          <figure class="photo reveal"><img src="Photos/A19.jpg" alt="Artwork by Pearl Bipin — A19" loading="lazy" decoding="async"><span class="photo-label">A19</span></figure>
-          <figure class="photo reveal"><img src="Photos/A20.jpg" alt="Artwork by Pearl Bipin — A20" loading="lazy" decoding="async"><span class="photo-label">A20</span></figure>
-          <figure class="photo reveal"><img src="Photos/A21.jpg" alt="Artwork by Pearl Bipin — A21" loading="lazy" decoding="async"><span class="photo-label">A21</span></figure>
-          <figure class="photo reveal"><img src="Photos/A22.jpg" alt="Artwork by Pearl Bipin — A22" loading="lazy" decoding="async"><span class="photo-label">A22</span></figure>
-          <figure class="photo reveal"><img src="Photos/A23.jpg" alt="Artwork by Pearl Bipin — A23" loading="lazy" decoding="async"><span class="photo-label">A23</span></figure>
-          <figure class="photo reveal"><img src="Photos/A24.jpg" alt="Artwork by Pearl Bipin — A24" loading="lazy" decoding="async"><span class="photo-label">A24</span></figure>
-          <figure class="photo reveal"><img src="Photos/A25.jpg" alt="Artwork by Pearl Bipin — A25" loading="lazy" decoding="async"><span class="photo-label">A25</span></figure>
-          <figure class="photo reveal"><img src="Photos/A26.JPG" alt="Artwork by Pearl Bipin — A26" loading="lazy" decoding="async"><span class="photo-label">A26</span></figure>
-          <figure class="photo reveal"><img src="Photos/A27.JPG" alt="Artwork by Pearl Bipin — A27" loading="lazy" decoding="async"><span class="photo-label">A27</span></figure>
-          <figure class="photo reveal"><img src="Photos/A28.jpg" alt="Artwork by Pearl Bipin — A28" loading="lazy" decoding="async"><span class="photo-label">A28</span></figure>
-          <figure class="photo reveal"><img src="Photos/A29.jpg" alt="Artwork by Pearl Bipin — A29" loading="lazy" decoding="async"><span class="photo-label">A29</span></figure>
-          <figure class="photo reveal"><img src="Photos/A30.JPG" alt="Artwork by Pearl Bipin — A30" loading="lazy" decoding="async"><span class="photo-label">A30</span></figure>
-          <figure class="photo reveal"><img src="Photos/A31.JPG" alt="Artwork by Pearl Bipin — A31" loading="lazy" decoding="async"><span class="photo-label">A31</span></figure>
-          <figure class="photo reveal"><img src="Photos/A32.JPG" alt="Artwork by Pearl Bipin — A32" loading="lazy" decoding="async"><span class="photo-label">A32</span></figure>
-          <figure class="photo reveal"><img src="Photos/A33.JPG" alt="Artwork by Pearl Bipin — A33" loading="lazy" decoding="async"><span class="photo-label">A33</span></figure>
-          <figure class="photo reveal"><img src="Photos/A34.JPG" alt="Artwork by Pearl Bipin — A34" loading="lazy" decoding="async"><span class="photo-label">A34</span></figure>
-          <figure class="photo reveal"><img src="Photos/A35.JPG" alt="Artwork by Pearl Bipin — A35" loading="lazy" decoding="async"><span class="photo-label">A35</span></figure>
-          <figure class="photo reveal"><img src="Photos/A36.JPG" alt="Artwork by Pearl Bipin — A36" loading="lazy" decoding="async"><span class="photo-label">A36</span></figure>
+          <figure class="photo"><img src="Photos/A1.jpg" alt="Artwork by Pearl Bipin — A1" loading="lazy" decoding="async"><span class="photo-label">A1</span></figure>
+          <figure class="photo"><img src="Photos/A2.jpg" alt="Artwork by Pearl Bipin — A2" loading="lazy" decoding="async"><span class="photo-label">A2</span></figure>
+          <figure class="photo"><img src="Photos/A3.jpg" alt="Artwork by Pearl Bipin — A3" loading="lazy" decoding="async"><span class="photo-label">A3</span></figure>
+          <figure class="photo"><img src="Photos/A4.jpg" alt="Artwork by Pearl Bipin — A4" loading="lazy" decoding="async"><span class="photo-label">A4</span></figure>
+          <figure class="photo"><img src="Photos/A5.jpg" alt="Artwork by Pearl Bipin — A5" loading="lazy" decoding="async"><span class="photo-label">A5</span></figure>
+          <figure class="photo"><img src="Photos/A6.jpg" alt="Artwork by Pearl Bipin — A6" loading="lazy" decoding="async"><span class="photo-label">A6</span></figure>
+          <figure class="photo"><img src="Photos/A7.jpg" alt="Artwork by Pearl Bipin — A7" loading="lazy" decoding="async"><span class="photo-label">A7</span></figure>
+          <figure class="photo"><img src="Photos/A8.jpg" alt="Artwork by Pearl Bipin — A8" loading="lazy" decoding="async"><span class="photo-label">A8</span></figure>
+          <figure class="photo"><img src="Photos/A9.jpg" alt="Artwork by Pearl Bipin — A9" loading="lazy" decoding="async"><span class="photo-label">A9</span></figure>
+          <figure class="photo"><img src="Photos/A10.jpg" alt="Artwork by Pearl Bipin — A10" loading="lazy" decoding="async"><span class="photo-label">A10</span></figure>
+          <figure class="photo"><img src="Photos/A11.jpg" alt="Artwork by Pearl Bipin — A11" loading="lazy" decoding="async"><span class="photo-label">A11</span></figure>
+          <figure class="photo"><img src="Photos/A12.jpg" alt="Artwork by Pearl Bipin — A12" loading="lazy" decoding="async"><span class="photo-label">A12</span></figure>
+          <figure class="photo"><img src="Photos/A13.jpg" alt="Artwork by Pearl Bipin — A13" loading="lazy" decoding="async"><span class="photo-label">A13</span></figure>
+          <figure class="photo"><img src="Photos/A14.jpg" alt="Artwork by Pearl Bipin — A14" loading="lazy" decoding="async"><span class="photo-label">A14</span></figure>
+          <figure class="photo"><img src="Photos/A15.jpg" alt="Artwork by Pearl Bipin — A15" loading="lazy" decoding="async"><span class="photo-label">A15</span></figure>
+          <figure class="photo"><img src="Photos/A16.jpg" alt="Artwork by Pearl Bipin — A16" loading="lazy" decoding="async"><span class="photo-label">A16</span></figure>
+          <figure class="photo"><img src="Photos/A17.jpg" alt="Artwork by Pearl Bipin — A17" loading="lazy" decoding="async"><span class="photo-label">A17</span></figure>
+          <figure class="photo"><img src="Photos/A18.jpg" alt="Artwork by Pearl Bipin — A18" loading="lazy" decoding="async"><span class="photo-label">A18</span></figure>
+          <figure class="photo"><img src="Photos/A19.jpg" alt="Artwork by Pearl Bipin — A19" loading="lazy" decoding="async"><span class="photo-label">A19</span></figure>
+          <figure class="photo"><img src="Photos/A20.jpg" alt="Artwork by Pearl Bipin — A20" loading="lazy" decoding="async"><span class="photo-label">A20</span></figure>
+          <figure class="photo"><img src="Photos/A21.jpg" alt="Artwork by Pearl Bipin — A21" loading="lazy" decoding="async"><span class="photo-label">A21</span></figure>
+          <figure class="photo"><img src="Photos/A22.jpg" alt="Artwork by Pearl Bipin — A22" loading="lazy" decoding="async"><span class="photo-label">A22</span></figure>
+          <figure class="photo"><img src="Photos/A23.jpg" alt="Artwork by Pearl Bipin — A23" loading="lazy" decoding="async"><span class="photo-label">A23</span></figure>
+          <figure class="photo"><img src="Photos/A24.jpg" alt="Artwork by Pearl Bipin — A24" loading="lazy" decoding="async"><span class="photo-label">A24</span></figure>
+          <figure class="photo"><img src="Photos/A25.jpg" alt="Artwork by Pearl Bipin — A25" loading="lazy" decoding="async"><span class="photo-label">A25</span></figure>
+          <figure class="photo"><img src="Photos/A26.JPG" alt="Artwork by Pearl Bipin — A26" loading="lazy" decoding="async"><span class="photo-label">A26</span></figure>
+          <figure class="photo"><img src="Photos/A27.JPG" alt="Artwork by Pearl Bipin — A27" loading="lazy" decoding="async"><span class="photo-label">A27</span></figure>
+          <figure class="photo"><img src="Photos/A28.jpg" alt="Artwork by Pearl Bipin — A28" loading="lazy" decoding="async"><span class="photo-label">A28</span></figure>
+          <figure class="photo"><img src="Photos/A29.jpg" alt="Artwork by Pearl Bipin — A29" loading="lazy" decoding="async"><span class="photo-label">A29</span></figure>
+          <figure class="photo"><img src="Photos/A30.JPG" alt="Artwork by Pearl Bipin — A30" loading="lazy" decoding="async"><span class="photo-label">A30</span></figure>
+          <figure class="photo"><img src="Photos/A31.JPG" alt="Artwork by Pearl Bipin — A31" loading="lazy" decoding="async"><span class="photo-label">A31</span></figure>
+          <figure class="photo"><img src="Photos/A32.JPG" alt="Artwork by Pearl Bipin — A32" loading="lazy" decoding="async"><span class="photo-label">A32</span></figure>
+          <figure class="photo"><img src="Photos/A33.JPG" alt="Artwork by Pearl Bipin — A33" loading="lazy" decoding="async"><span class="photo-label">A33</span></figure>
+          <figure class="photo"><img src="Photos/A34.JPG" alt="Artwork by Pearl Bipin — A34" loading="lazy" decoding="async"><span class="photo-label">A34</span></figure>
+          <figure class="photo"><img src="Photos/A35.JPG" alt="Artwork by Pearl Bipin — A35" loading="lazy" decoding="async"><span class="photo-label">A35</span></figure>
+          <figure class="photo"><img src="Photos/A36.JPG" alt="Artwork by Pearl Bipin — A36" loading="lazy" decoding="async"><span class="photo-label">A36</span></figure>
         </div>
       </div>
     </section>
-
     <!-- MOTORCYCLES -->
     <section class="section" id="motorcycles">
       <div class="site-shell">
@@ -1100,17 +1167,16 @@
 
         <div class="mini-wrap">
           <div class="mini-grid" aria-label="Pearl Bipin motorcycle photographs">
-            <figure class="photo reveal"><img src="Photos/M1.jpg" alt="Pearl Bipin — motorcycle photograph M1" loading="lazy" decoding="async"><span class="photo-label">M1</span></figure>
-            <figure class="photo reveal"><img src="Photos/M2.jpg" alt="Pearl Bipin — motorcycle photograph M2" loading="lazy" decoding="async"><span class="photo-label">M2</span></figure>
-            <figure class="photo reveal"><img src="Photos/M3.jpg" alt="Pearl Bipin — motorcycle photograph M3" loading="lazy" decoding="async"><span class="photo-label">M3</span></figure>
-            <figure class="photo reveal"><img src="Photos/M4.jpg" alt="Pearl Bipin — motorcycle photograph M4" loading="lazy" decoding="async"><span class="photo-label">M4</span></figure>
-            <figure class="photo reveal"><img src="Photos/M5.jpg" alt="Pearl Bipin — motorcycle photograph M5" loading="lazy" decoding="async"><span class="photo-label">M5</span></figure>
-            <figure class="photo reveal"><img src="Photos/M6.jpg" alt="Pearl Bipin — motorcycle photograph M6" loading="lazy" decoding="async"><span class="photo-label">M6</span></figure>
+            <figure class="photo"><img src="Photos/M1.jpg" alt="Pearl Bipin — motorcycle photograph M1" loading="lazy" decoding="async"><span class="photo-label">M1</span></figure>
+            <figure class="photo"><img src="Photos/M2.jpg" alt="Pearl Bipin — motorcycle photograph M2" loading="lazy" decoding="async"><span class="photo-label">M2</span></figure>
+            <figure class="photo"><img src="Photos/M3.jpg" alt="Pearl Bipin — motorcycle photograph M3" loading="lazy" decoding="async"><span class="photo-label">M3</span></figure>
+            <figure class="photo"><img src="Photos/M4.jpg" alt="Pearl Bipin — motorcycle photograph M4" loading="lazy" decoding="async"><span class="photo-label">M4</span></figure>
+            <figure class="photo"><img src="Photos/M5.jpg" alt="Pearl Bipin — motorcycle photograph M5" loading="lazy" decoding="async"><span class="photo-label">M5</span></figure>
+            <figure class="photo"><img src="Photos/M6.jpg" alt="Pearl Bipin — motorcycle photograph M6" loading="lazy" decoding="async"><span class="photo-label">M6</span></figure>
           </div>
         </div>
       </div>
     </section>
-
     <!-- MEMORIES -->
     <section class="section" id="memories">
       <div class="site-shell">
@@ -1123,22 +1189,21 @@
         </div>
 
         <div class="masonry" aria-label="Pearl Bipin family and older memory photographs">
-          <figure class="photo reveal"><img src="Photos/R1.jpg" alt="Pearl Bipin — family or memory photograph R1" loading="lazy" decoding="async"><span class="photo-label">R1</span></figure>
-          <figure class="photo reveal"><img src="Photos/R2.jpg" alt="Pearl Bipin — family or memory photograph R2" loading="lazy" decoding="async"><span class="photo-label">R2</span></figure>
-          <figure class="photo reveal"><img src="Photos/R3.jpg" alt="Pearl Bipin — family or memory photograph R3" loading="lazy" decoding="async"><span class="photo-label">R3</span></figure>
-          <figure class="photo reveal"><img src="Photos/R4.jpg" alt="Pearl Bipin — family or memory photograph R4" loading="lazy" decoding="async"><span class="photo-label">R4</span></figure>
-          <figure class="photo reveal"><img src="Photos/R5.jpg" alt="Pearl Bipin — family or memory photograph R5" loading="lazy" decoding="async"><span class="photo-label">R5</span></figure>
-          <figure class="photo reveal"><img src="Photos/R6.jpg" alt="Pearl Bipin — family or memory photograph R6" loading="lazy" decoding="async"><span class="photo-label">R6</span></figure>
-          <figure class="photo reveal"><img src="Photos/R7.jpg" alt="Pearl Bipin — family or memory photograph R7" loading="lazy" decoding="async"><span class="photo-label">R7</span></figure>
-          <figure class="photo reveal"><img src="Photos/R8.JPG" alt="Pearl Bipin — family or memory photograph R8" loading="lazy" decoding="async"><span class="photo-label">R8</span></figure>
-          <figure class="photo reveal"><img src="Photos/R9.JPG" alt="Pearl Bipin — family or memory photograph R9" loading="lazy" decoding="async"><span class="photo-label">R9</span></figure>
-          <figure class="photo reveal"><img src="Photos/R10.jpg" alt="Pearl Bipin — family or memory photograph R10" loading="lazy" decoding="async"><span class="photo-label">R10</span></figure>
-          <figure class="photo reveal"><img src="Photos/R11.jpg" alt="Pearl Bipin — family or memory photograph R11" loading="lazy" decoding="async"><span class="photo-label">R11</span></figure>
-          <figure class="photo reveal"><img src="Photos/R12.jpg" alt="Pearl Bipin — family or memory photograph R12" loading="lazy" decoding="async"><span class="photo-label">R12</span></figure>
+          <figure class="photo"><img src="Photos/R1.jpg" alt="Pearl Bipin — family or memory photograph R1" loading="lazy" decoding="async"><span class="photo-label">R1</span></figure>
+          <figure class="photo"><img src="Photos/R2.jpg" alt="Pearl Bipin — family or memory photograph R2" loading="lazy" decoding="async"><span class="photo-label">R2</span></figure>
+          <figure class="photo"><img src="Photos/R3.jpg" alt="Pearl Bipin — family or memory photograph R3" loading="lazy" decoding="async"><span class="photo-label">R3</span></figure>
+          <figure class="photo"><img src="Photos/R4.jpg" alt="Pearl Bipin — family or memory photograph R4" loading="lazy" decoding="async"><span class="photo-label">R4</span></figure>
+          <figure class="photo"><img src="Photos/R5.jpg" alt="Pearl Bipin — family or memory photograph R5" loading="lazy" decoding="async"><span class="photo-label">R5</span></figure>
+          <figure class="photo"><img src="Photos/R6.jpg" alt="Pearl Bipin — family or memory photograph R6" loading="lazy" decoding="async"><span class="photo-label">R6</span></figure>
+          <figure class="photo"><img src="Photos/R7.jpg" alt="Pearl Bipin — family or memory photograph R7" loading="lazy" decoding="async"><span class="photo-label">R7</span></figure>
+          <figure class="photo"><img src="Photos/R8.JPG" alt="Pearl Bipin — family or memory photograph R8" loading="lazy" decoding="async"><span class="photo-label">R8</span></figure>
+          <figure class="photo"><img src="Photos/R9.JPG" alt="Pearl Bipin — family or memory photograph R9" loading="lazy" decoding="async"><span class="photo-label">R9</span></figure>
+          <figure class="photo"><img src="Photos/R10.jpg" alt="Pearl Bipin — family or memory photograph R10" loading="lazy" decoding="async"><span class="photo-label">R10</span></figure>
+          <figure class="photo"><img src="Photos/R11.jpg" alt="Pearl Bipin — family or memory photograph R11" loading="lazy" decoding="async"><span class="photo-label">R11</span></figure>
+          <figure class="photo"><img src="Photos/R12.jpg" alt="Pearl Bipin — family or memory photograph R12" loading="lazy" decoding="async"><span class="photo-label">R12</span></figure>
         </div>
       </div>
     </section>
-
     <!-- MORE -->
     <section class="section" id="more">
       <div class="site-shell">
@@ -1157,14 +1222,14 @@
           </div>
 
           <div class="mini-grid" aria-label="Pearl Bipin cat photographs">
-            <figure class="photo reveal"><img src="Photos/K1.JPG" alt="Kitchu, Pearl Bipin's pet cat — photograph K1" loading="lazy" decoding="async"><span class="photo-label">K1</span></figure>
-            <figure class="photo reveal"><img src="Photos/K2.JPG" alt="Kitchu, Pearl Bipin's pet cat — photograph K2" loading="lazy" decoding="async"><span class="photo-label">K2</span></figure>
-            <figure class="photo reveal"><img src="Photos/K3.JPG" alt="Kitchu, Pearl Bipin's pet cat — photograph K3" loading="lazy" decoding="async"><span class="photo-label">K3</span></figure>
-            <figure class="photo reveal"><img src="Photos/K4.jpg" alt="Kitchu, Pearl Bipin's pet cat — photograph K4" loading="lazy" decoding="async"><span class="photo-label">K4</span></figure>
-            <figure class="photo reveal"><img src="Photos/K5.jpg" alt="Kitchu, Pearl Bipin's pet cat — photograph K5" loading="lazy" decoding="async"><span class="photo-label">K5</span></figure>
-            <figure class="photo reveal"><img src="Photos/K6.jpg" alt="Kitchu, Pearl Bipin's pet cat — photograph K6" loading="lazy" decoding="async"><span class="photo-label">K6</span></figure>
-            <figure class="photo reveal"><img src="Photos/K7.jpg" alt="Kitchu, Pearl Bipin's pet cat — photograph K7" loading="lazy" decoding="async"><span class="photo-label">K7</span></figure>
-            <figure class="photo reveal"><img src="Photos/K8.jpg" alt="Kitchu, Pearl Bipin's pet cat — photograph K8" loading="lazy" decoding="async"><span class="photo-label">K8</span></figure>
+            <figure class="photo"><img src="Photos/K1.JPG" alt="Kitchu, Pearl Bipin's pet cat — photograph K1" loading="lazy" decoding="async"><span class="photo-label">K1</span></figure>
+            <figure class="photo"><img src="Photos/K2.JPG" alt="Kitchu, Pearl Bipin's pet cat — photograph K2" loading="lazy" decoding="async"><span class="photo-label">K2</span></figure>
+            <figure class="photo"><img src="Photos/K3.JPG" alt="Kitchu, Pearl Bipin's pet cat — photograph K3" loading="lazy" decoding="async"><span class="photo-label">K3</span></figure>
+            <figure class="photo"><img src="Photos/K4.jpg" alt="Kitchu, Pearl Bipin's pet cat — photograph K4" loading="lazy" decoding="async"><span class="photo-label">K4</span></figure>
+            <figure class="photo"><img src="Photos/K5.jpg" alt="Kitchu, Pearl Bipin's pet cat — photograph K5" loading="lazy" decoding="async"><span class="photo-label">K5</span></figure>
+            <figure class="photo"><img src="Photos/K6.jpg" alt="Kitchu, Pearl Bipin's pet cat — photograph K6" loading="lazy" decoding="async"><span class="photo-label">K6</span></figure>
+            <figure class="photo"><img src="Photos/K7.jpg" alt="Kitchu, Pearl Bipin's pet cat — photograph K7" loading="lazy" decoding="async"><span class="photo-label">K7</span></figure>
+            <figure class="photo"><img src="Photos/K8.jpg" alt="Kitchu, Pearl Bipin's pet cat — photograph K8" loading="lazy" decoding="async"><span class="photo-label">K8</span></figure>
           </div>
 
           <div class="section-intro reveal" style="margin: 100px auto 25px;">
@@ -1173,10 +1238,10 @@
           </div>
 
           <div class="mini-grid" aria-label="Pearl Bipin food photographs">
-            <figure class="photo reveal"><img src="Photos/C1.jpg" alt="Pearl Bipin — food he cooked, photograph C1" loading="lazy" decoding="async"><span class="photo-label">C1</span></figure>
-            <figure class="photo reveal"><img src="Photos/C2.jpg" alt="Pearl Bipin — food he cooked, photograph C2" loading="lazy" decoding="async"><span class="photo-label">C2</span></figure>
-            <figure class="photo reveal"><img src="Photos/C3.jpg" alt="Pearl Bipin — food he cooked, photograph C3" loading="lazy" decoding="async"><span class="photo-label">C3</span></figure>
-            <figure class="photo reveal"><img src="Photos/C4.JPG" alt="Pearl Bipin — food he cooked, photograph C4" loading="lazy" decoding="async"><span class="photo-label">C4</span></figure>
+            <figure class="photo"><img src="Photos/C1.jpg" alt="Pearl Bipin — food he cooked, photograph C1" loading="lazy" decoding="async"><span class="photo-label">C1</span></figure>
+            <figure class="photo"><img src="Photos/C2.jpg" alt="Pearl Bipin — food he cooked, photograph C2" loading="lazy" decoding="async"><span class="photo-label">C2</span></figure>
+            <figure class="photo"><img src="Photos/C3.jpg" alt="Pearl Bipin — food he cooked, photograph C3" loading="lazy" decoding="async"><span class="photo-label">C3</span></figure>
+            <figure class="photo"><img src="Photos/C4.JPG" alt="Pearl Bipin — food he cooked, photograph C4" loading="lazy" decoding="async"><span class="photo-label">C4</span></figure>
           </div>
 
           <div class="section-intro reveal" style="margin: 100px auto 25px;">
@@ -1185,8 +1250,8 @@
           </div>
 
           <div class="two-up" aria-label="Miscellaneous photographs">
-            <figure class="photo reveal"><img src="Photos/H1.jpg" alt="Pearl Bipin — miscellaneous photograph H1" loading="lazy" decoding="async"><span class="photo-label">H1</span></figure>
-            <figure class="photo reveal"><img src="Photos/H2.jpg" alt="Pearl Bipin — miscellaneous photograph H2" loading="lazy" decoding="async"><span class="photo-label">H2</span></figure>
+            <figure class="photo"><img src="Photos/H1.jpg" alt="Pearl Bipin — miscellaneous photograph H1" loading="lazy" decoding="async"><span class="photo-label">H1</span></figure>
+            <figure class="photo"><img src="Photos/H2.jpg" alt="Pearl Bipin — miscellaneous photograph H2" loading="lazy" decoding="async"><span class="photo-label">H2</span></figure>
           </div>
         </div>
       </div>
@@ -1293,72 +1358,190 @@
         if (event.key === "ArrowRight") setPhoto(current + 1);
       });
 
-      // Resolve images softly as they load, reducing the perceived "pop".
-      document.querySelectorAll(".photo img").forEach(img => {
-        if (img.complete && img.naturalWidth > 0) {
-          img.classList.add("is-loaded");
-        } else {
-          img.addEventListener("load", () => img.classList.add("is-loaded"), { once: true });
-          img.addEventListener("error", () => img.classList.add("is-loaded"), { once: true });
-        }
-      });
+      // Lightweight reveal system for the opening/chapter typography.
+      // Photographs are intentionally excluded so scrolling never waits on JS
+      // animation work.
+      const revealElements = [...document.querySelectorAll(".reveal:not(.photo)")];
+      const openingInner = document.querySelector(".opening-inner");
 
-      // Reveal sections/images with a restrained stagger.
-      const revealItems = [...document.querySelectorAll(".reveal")];
-      revealItems.forEach((el, index) => {
-        el.style.setProperty("--reveal-delay", `${Math.min((index % 5) * 45, 180)}ms`);
-      });
-
-      const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          const el = entry.target;
-          window.setTimeout(
-            () => el.classList.add("visible"),
-            parseInt(getComputedStyle(el).getPropertyValue("--reveal-delay")) || 0
-          );
-          observer.unobserve(el);
+      if (openingInner) {
+        requestAnimationFrame(() => {
+          openingInner.classList.add("intro-settle");
+          openingInner.classList.add("visible");
         });
-      }, { threshold: 0.05, rootMargin: "0px 0px -60px 0px" });
+      }
 
-      revealItems.forEach(el => revealObserver.observe(el));
+      const revealObserver =
+        "IntersectionObserver" in window
+          ? new IntersectionObserver((entries, observer) => {
+              entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+              });
+            }, {
+              rootMargin: "140px 0px 140px 0px",
+              threshold: 0
+            })
+          : null;
 
-      // Start decoding images a little before they enter the viewport.
-      // Native lazy-loading remains enabled; this simply removes avoidable waiting.
-      const nearObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          const img = entry.target;
-          if (img.loading === "lazy") {
-            img.loading = "eager";
+      if (revealObserver) {
+        revealElements.forEach(el => {
+          if (el === openingInner) return;
+          revealObserver.observe(el);
+        });
+      } else {
+        revealElements.forEach(el => el.classList.add("visible"));
+      }
+
+      /*
+       * LINEAR IMAGE PIPELINE
+       *
+       * The visitor moves from top to bottom, so the browser does the same.
+       * We request a controlled number of images ahead of the visitor,
+       * keeping bandwidth busy without turning the page into a 100-image
+       * download at once.
+       */
+      const photoImages = [...document.querySelectorAll(".photo img")];
+      const prefetchQueue = [];
+      const prefetchCache = new Map();
+      const queued = new Set();
+      let activePrefetches = 0;
+
+      const connection =
+        navigator.connection ||
+        navigator.mozConnection ||
+        navigator.webkitConnection;
+
+      const saveData = Boolean(connection && connection.saveData);
+      const effectiveType = connection && connection.effectiveType;
+      const isSlowNetwork = effectiveType === "slow-2g" || effectiveType === "2g";
+
+      const MAX_ACTIVE = saveData ? 1 : (isSlowNetwork ? 2 : 4);
+      const INITIAL_AHEAD = saveData ? 4 : (isSlowNetwork ? 6 : 12);
+      const ROLLING_AHEAD = saveData ? 3 : (isSlowNetwork ? 5 : 12);
+
+      function pumpPrefetchQueue() {
+        while (activePrefetches < MAX_ACTIVE && prefetchQueue.length) {
+          let position = prefetchQueue.findIndex(item => item.priority === "high");
+          if (position < 0) position = 0;
+
+          const job = prefetchQueue.splice(position, 1)[0];
+          const source = photoImages[job.index];
+          if (!source) continue;
+
+          activePrefetches++;
+
+          const probe = new Image();
+          probe.decoding = "async";
+
+          if ("fetchPriority" in probe) {
+            probe.fetchPriority = job.priority;
           }
-          img.decoding = "async";
+
+          probe.src = source.currentSrc || source.src;
+
+          const done = () => {
+            activePrefetches--;
+            prefetchCache.set(job.index, probe);
+            pumpPrefetchQueue();
+          };
+
+          probe.addEventListener("load", done, { once: true });
+          probe.addEventListener("error", done, { once: true });
+        }
+      }
+
+      function enqueue(index, priority = "low") {
+        if (index < 0 || index >= photoImages.length) return;
+        if (queued.has(index)) return;
+
+        queued.add(index);
+        prefetchQueue.push({ index, priority });
+        pumpPrefetchQueue();
+      }
+
+      function warmAhead(centerIndex, count = ROLLING_AHEAD) {
+        const end = Math.min(photoImages.length, centerIndex + count + 1);
+
+        for (let i = centerIndex; i < end; i++) {
+          enqueue(i, i < centerIndex + 4 ? "high" : "low");
+        }
+      }
+
+      // Start the first batch while the opening animation is playing.
+      warmAhead(0, INITIAL_AHEAD);
+
+      // As each photograph approaches, extend the rolling window.
+      const linearObserver = new IntersectionObserver((entries, observer) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+
+          const index = Number(entry.target.dataset.photoIndex);
+          if (Number.isFinite(index)) {
+            warmAhead(index);
+          }
+
+          observer.unobserve(entry.target);
+        }
+      }, {
+        rootMargin: "2200px 0px 2200px 0px",
+        threshold: 0
+      });
+
+      photoImages.forEach((img, index) => {
+        img.dataset.photoIndex = index;
+        linearObserver.observe(img);
+      });
+
+      /*
+       * Keep the first visible set decoded while the browser is idle.
+       * Do not decode the whole archive; that would move work onto the scroll path.
+       */
+      const warmFirstImages = () => {
+        const count = saveData ? 2 : 4;
+        for (let i = 0; i < Math.min(count, photoImages.length); i++) {
+          const img = photoImages[i];
           if ("decode" in img) {
             img.decode().catch(() => {});
           }
-          observer.unobserve(img);
-        });
-      }, { rootMargin: "900px 0px 900px 0px", threshold: 0 });
-
-      document.querySelectorAll(".photo img").forEach(img => nearObserver.observe(img));
-
-      // Short opening transition. It waits briefly for the first visual to be
-      // available, but never holds the page for long.
-      const introLoader = document.getElementById("introLoader");
-      const firstImage = document.querySelector(".photo img");
-
-      const finishIntro = () => {
-        window.setTimeout(() => introLoader.classList.add("done"), 620);
+        }
       };
 
-      if (firstImage && firstImage.complete && firstImage.naturalWidth > 0) {
-        finishIntro();
-      } else if (firstImage) {
-        firstImage.addEventListener("load", finishIntro, { once: true });
-        window.setTimeout(finishIntro, 1500);
+      if ("requestIdleCallback" in window) {
+        requestIdleCallback(warmFirstImages, { timeout: 700 });
       } else {
-        finishIntro();
+        window.setTimeout(warmFirstImages, 120);
       }
+
+      /*
+       * Decode only the first few images while the browser is otherwise idle.
+       * This moves CPU work away from a fast scroll gesture.
+       */
+      const warmVisibleImages = () => {
+        const warmCount = saveData ? 2 : (isSlowNetwork ? 2 : 4);
+
+        for (let i = 0; i < Math.min(warmCount, photoImages.length); i++) {
+          const img = photoImages[i];
+          if ("decode" in img) {
+            img.decode().catch(() => {});
+          }
+        }
+      };
+
+      if ("requestIdleCallback" in window) {
+        requestIdleCallback(warmVisibleImages, { timeout: 900 });
+      } else {
+        window.setTimeout(warmVisibleImages, 180);
+      }
+
+      // Short opening animation. The first prefetch wave starts immediately;
+      // the page never waits on the network before becoming interactive.
+      const introLoader = document.getElementById("introLoader");
+
+      window.setTimeout(() => {
+        introLoader.classList.add("done");
+      }, 500);
     })();
   </script>
 </body>
