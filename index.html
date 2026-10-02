@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#060606">
+  <meta name="color-scheme" content="dark">
+
+  <title>Pearl Bipin Photos | Personal Photos, Art, Motorcycles & Memories</title>
+  <meta
+    name="description"
+    content="Pearl Bipin's personal photo archive: portraits, everyday life, artwork, motorcycles, family memories, cats, food, and other things worth remembering."
+  >
+  <meta name="author" content="Pearl Bipin">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+  <link rel="canonical" href="https://pearlbipinphotos.vercel.app/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Pearl Bipin Photos">
+  <meta property="og:title" content="Pearl Bipin Photos">
+  <meta
+    property="og:description"
+    content="A personal collection of photographs, artwork, motorcycles, memories, and small pieces of everyday life."
+  >
+  <meta property="og:url" content="https://pearlbipinphotos.vercel.app/">
+  <meta property="og:image" content="https://pearlbipinphotos.vercel.app/Photos/P1.jpg">
+  <meta property="og:image:alt" content="Pearl Bipin — personal photograph">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pearl Bipin Photos">
+  <meta
+    name="twitter:description"
+    content="A personal collection of photographs, artwork, motorcycles, memories, and small pieces of everyday life."
+  >
+  <meta name="twitter:image" content="https://pearlbipinphotos.vercel.app/Photos/P1.jpg">
+  <meta name="twitter:image:alt" content="Pearl Bipin — personal photograph">
+
+  <!-- Structured data: the page is a personal visual archive belonging to a real person. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "@id": "https://pearlbipinphotos.vercel.app/#profile",
+    "url": "https://pearlbipinphotos.vercel.app/",
+    "name": "Pearl Bipin Photos",
+    "description": "Pearl Bipin's personal collection of photographs, artwork, motorcycles, memories, cats, food, and everyday life.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": "https://pearlbipinphotos.vercel.app/#website",
+      "url": "https://pearlbipinphotos.vercel.app/",
+      "name": "Pearl Bipin Photos"
+    },
+    "mainEntity": {
+      "@type": "Person",
+      "@id": "https://pearlbipinphotos.vercel.app/#pearl-bipin",
+      "name": "Pearl Bipin",
+      "url": "https://pearlbipinphotos.vercel.app/",
+      "image": "https://pearlbipinphotos.vercel.app/Photos/P1.jpg",
+      "sameAs": [
+        "https://pearlbipinpulickal.neocities.org/"
+      ]
+    }
+  }
+  </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap');
+
+    :root {
+      --black: #060606;
+      --black-2: #0b0b0b;
+      --paper: #eee9df;
+      --soft: #bab2a7;
+      --gold: #d2ae62;
+      --gold-dim: rgba(210, 174, 98, 0.24);
+      --line: rgba(238, 233, 223, 0.12);
+      --max: 1380px;
+      --serif: "Cormorant Garamond", Georgia, serif;
+      --sans: "Manrope", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--black);
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 50% -10%, rgba(210,174,98,0.055), transparent 30rem),
+        var(--black);
+      color: var(--paper);
+      font-family: var(--sans);
+      overflow-x: hidden;
+    }
+
+    body.is-viewing {
+      overflow: hidden;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    ::selection {
+      background: var(--gold);
+      color: #111;
+    }
+
+    .site-shell {
+      width: min(var(--max), calc(100% - 44px));
+      margin-inline: auto;
+    }
+
+    /* -------------------------
+       Subtle page texture
+    -------------------------- */
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      pointer-events: none;
+      opacity: .032;
+      background-image:
+        radial-gradient(rgba(255,255,255,.65) .6px, transparent .6px);
+      background-size: 4px 4px;
+      mix-blend-mode: soft-light;
+    }
+
+    /* -------------------------
+       Header
+    -------------------------- */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 80;
+      border-bottom: 1px solid rgba(238,233,223,.08);
+      background: rgba(6,6,6,.82);
+      backdrop-filter: blur(14px);
+    }
+
+    .topbar-inner {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 26px;
+    }
+
+    .wordmark {
+      text-decoration: none;
+      white-space: nowrap;
+      font-family: var(--serif);
+      font-size: 1.45rem;
+      font-weight: 500;
+      letter-spacing: .015em;
+    }
+
+    .wordmark .dot {
+      color: var(--gold);
+      padding-left: .06em;
+    }
+
+    .navigation {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 19px;
+    }
+
+    .navigation a {
+      color: #a9a198;
+      text-decoration: none;
+      font-size: .68rem;
+      font-weight: 500;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      transition: color .22s ease;
+    }
+
+    .navigation a:hover,
+    .navigation a:focus-visible {
+      color: var(--gold);
+    }
+
+    /* -------------------------
+       Opening
+    -------------------------- */
+    .opening {
+      min-height: 78vh;
+      display: grid;
+      place-items: center;
+      padding: 100px 0 115px;
+      text-align: center;
+      position: relative;
+    }
+
+    .opening::before,
+    .opening::after {
+      content: "";
+      position: absolute;
+      width: 1px;
+      height: 82px;
+      left: 50%;
+      background: linear-gradient(to bottom, transparent, var(--gold-dim));
+      transform: translateX(-50%);
+    }
+
+    .opening::before { top: 0; }
+    .opening::after {
+      bottom: 0;
+      background: linear-gradient(to bottom, var(--gold-dim), transparent);
+    }
+
+    .opening-inner {
+      max-width: 900px;
+    }
+
+    .opening-kicker {
+      color: var(--gold);
+      font-size: .67rem;
+      font-weight: 600;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+    }
+
+    .opening h1 {
+      margin: 24px 0 19px;
+      font-family: var(--serif);
+      font-size: clamp(4rem, 10vw, 8.5rem);
+      line-height: .84;
+      font-weight: 400;
+      letter-spacing: -.055em;
+    }
+
+    .opening h1 span {
+      display: block;
+    }
+
+    .opening h1 span:last-child {
+      color: var(--gold);
+      font-style: italic;
+      padding-left: .55em;
+    }
+
+    .opening-lead {
+      width: min(590px, 100%);
+      margin: 0 auto;
+      color: #c0b8ae;
+      font-family: var(--serif);
+      font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+      line-height: 1.3;
+    }
+
+    .opening-note {
+      margin-top: 27px;
+      color: #78716a;
+      font-size: .67rem;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .scroll-cue {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      margin-top: 38px;
+      color: #7d766e;
+      font-size: .62rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .scroll-cue::after {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: var(--gold);
+      opacity: .65;
+    }
+
+    /* -------------------------
+       Intro / sections
+    -------------------------- */
+    section {
+      scroll-margin-top: 96px;
+    }
+
+    .section {
+      padding: 105px 0;
+    }
+
+    .section + .section {
+      border-top: 1px solid rgba(238,233,223,.065);
+    }
+
+    .section-intro {
+      width: min(700px, 100%);
+      margin: 0 auto 57px;
+      text-align: center;
+    }
+
+    .section-index {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--gold);
+      font-size: .64rem;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(2.55rem, 5vw, 4.6rem);
+      line-height: .92;
+      font-weight: 400;
+      letter-spacing: -.035em;
+    }
+
+    .section-subtitle {
+      margin: 18px auto 0;
+      color: #928a82;
+      font-size: .82rem;
+      line-height: 1.8;
+      max-width: 520px;
+    }
+
+    /* -------------------------
+       Masonry gallery
+    -------------------------- */
+    .masonry {
+      column-count: 3;
+      column-gap: 18px;
+    }
+
+    .photo {
+      break-inside: avoid;
+      margin: 0 0 18px;
+      position: relative;
+      overflow: hidden;
+      background: #101010;
+      border-radius: 2px;
+      cursor: zoom-in;
+      outline: none;
+    }
+
+    .photo img {
+      transition:
+        transform .75s cubic-bezier(.19,1,.22,1),
+        opacity .45s ease;
+      opacity: .955;
+    }
+
+    .photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(to top, rgba(0,0,0,.46), transparent 32%),
+        linear-gradient(to bottom, rgba(0,0,0,.08), transparent 24%);
+      opacity: 0;
+      transition: opacity .3s ease;
+    }
+
+    .photo:hover img,
+    .photo:focus-visible img {
+      transform: scale(1.022);
+      opacity: 1;
+    }
+
+    .photo:hover::after,
+    .photo:focus-visible::after {
+      opacity: 1;
+    }
+
+    .photo-label {
+      position: absolute;
+      left: 14px;
+      bottom: 13px;
+      z-index: 2;
+      opacity: 0;
+      transform: translateY(7px);
+      color: rgba(255,255,255,.88);
+      font-size: .6rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      transition: opacity .25s ease, transform .25s ease;
+      pointer-events: none;
+    }
+
+    .photo:hover .photo-label,
+    .photo:focus-visible .photo-label {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* A little more visual breathing room in large sections. */
+    .masonry.art {
+      column-count: 4;
+      column-gap: 14px;
+    }
+
+    .masonry.art .photo {
+      margin-bottom: 14px;
+    }
+
+    /* -------------------------
+       Smaller collections
+    -------------------------- */
+    .mini-wrap {
+      width: min(980px, 100%);
+      margin-inline: auto;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 14px;
+    }
+
+    .mini-grid .photo {
+      margin: 0;
+    }
+
+    .mini-grid .photo img {
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+
+    .two-up {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      width: min(860px, 100%);
+      margin-inline: auto;
+    }
+
+    .two-up .photo {
+      margin: 0;
+    }
+
+    .two-up .photo img {
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+
+    /* -------------------------
+       End note
+    -------------------------- */
+    .closing {
+      padding: 130px 0 125px;
+      text-align: center;
+      border-top: 1px solid rgba(238,233,223,.065);
+    }
+
+    .closing-mark {
+      color: var(--gold);
+      font-size: 1rem;
+      letter-spacing: .45em;
+      margin-left: .45em;
+    }
+
+    .closing p {
+      width: min(610px, 100%);
+      margin: 22px auto 0;
+      color: #898179;
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      line-height: 1.38;
+    }
+
+    .closing .small {
+      margin-top: 26px;
+      color: #5e5954;
+      font-family: var(--sans);
+      font-size: .62rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    footer {
+      padding: 35px 0 45px;
+      border-top: 1px solid rgba(238,233,223,.065);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    footer p {
+      margin: 0;
+      color: #56514c;
+      font-size: .61rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    /* -------------------------
+       Lightbox
+    -------------------------- */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: grid;
+      place-items: center;
+      padding: 25px;
+      background: rgba(3,3,3,.97);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity .22s ease, visibility .22s ease;
+    }
+
+    .lightbox.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .lightbox img {
+      width: auto;
+      max-width: min(92vw, 1500px);
+      max-height: 87vh;
+      object-fit: contain;
+      border: 1px solid rgba(210,174,98,.25);
+      box-shadow: 0 35px 120px rgba(0,0,0,.58);
+    }
+
+    .lightbox-caption {
+      position: absolute;
+      left: 25px;
+      right: 25px;
+      bottom: 17px;
+      text-align: center;
+      color: #756f68;
+      font-size: .59rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    .lightbox button {
+      position: absolute;
+      z-index: 3;
+      border: 0;
+      background: transparent;
+      color: #cfc8bf;
+      cursor: pointer;
+      transition: color .18s ease, transform .18s ease;
+    }
+
+    .lightbox button:hover,
+    .lightbox button:focus-visible {
+      color: var(--gold);
+    }
+
+    .lightbox-close {
+      top: 18px;
+      right: 23px;
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .lightbox-prev,
+    .lightbox-next {
+      top: 50%;
+      transform: translateY(-50%);
+      width: 54px;
+      height: 90px;
+      font-family: var(--serif);
+      font-size: 3.4rem;
+      line-height: 1;
+    }
+
+    .lightbox-prev { left: 10px; }
+    .lightbox-next { right: 10px; }
+
+    .lightbox-prev:hover,
+    .lightbox-next:hover,
+    .lightbox-prev:focus-visible,
+    .lightbox-next:focus-visible {
+      transform: translateY(-50%) scale(1.04);
+    }
+
+    /* -------------------------
+       Reveal
+    -------------------------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* -------------------------
+       Mobile
+    -------------------------- */
+    @media (max-width: 960px) {
+      .masonry { column-count: 2; }
+      .masonry.art { column-count: 3; }
+      .mini-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    }
+
+    @media (max-width: 680px) {
+      .site-shell {
+        width: min(100% - 24px, var(--max));
+      }
+
+      .topbar {
+        position: static;
+      }
+
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 17px 0 15px;
+      }
+
+      .navigation {
+        justify-content: flex-start;
+        gap: 12px 16px;
+      }
+
+      .opening {
+        min-height: 74vh;
+        padding: 77px 0 80px;
+      }
+
+      .opening h1 {
+        font-size: clamp(4rem, 22vw, 6rem);
+      }
+
+      .section {
+        padding: 76px 0;
+      }
+
+      .section-intro {
+        margin-bottom: 39px;
+      }
+
+      .masonry,
+      .masonry.art {
+        column-count: 2;
+        column-gap: 9px;
+      }
+
+      .photo,
+      .masonry.art .photo {
+        margin-bottom: 9px;
+        border-radius: 1px;
+      }
+
+      .mini-grid {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+        gap: 9px;
+      }
+
+      .two-up {
+        grid-template-columns: 1fr;
+        gap: 9px;
+      }
+
+      .closing {
+        padding: 95px 0;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .lightbox {
+        padding: 12px;
+      }
+
+      .lightbox img {
+        max-width: 96vw;
+        max-height: 86vh;
+      }
+
+      .lightbox-prev {
+        left: 2px;
+      }
+
+      .lightbox-next {
+        right: 2px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal,
+      .photo img,
+      .photo::after,
+      .photo-label,
+      .lightbox {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="site-shell topbar-inner">
+      <a class="wordmark" href="#top" aria-label="Pearl Bipin Photos home">
+        Pearl Bipin<span class="dot">.</span>
+      </a>
+
+      <nav class="navigation" aria-label="Main navigation">
+        <a href="#personal">Personal</a>
+        <a href="#artwork">Art</a>
+        <a href="#motorcycles">Motorcycles</a>
+        <a href="#memories">Memories</a>
+        <a href="#more">More</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="opening">
+      <div class="site-shell opening-inner reveal">
+        <div class="opening-kicker">Pearl Bipin · A personal archive</div>
+
+        <h1>
+          <span>A little</span>
+          <span>of my life.</span>
+        </h1>
+
+        <p class="opening-lead">
+          Photographs, things I make, things I like, and a few moments
+          I happened to keep.
+        </p>
+
+        <div class="opening-note">Pearl Bipin Photos · 2026</div>
+        <div class="scroll-cue">Scroll slowly</div>
+      </div>
+    </section>
+
+    <!-- PERSONAL -->
+    <section class="section" id="personal">
+      <div class="site-shell">
+        <div class="section-intro reveal">
+          <span class="section-index">01 · Personal</span>
+          <h2 class="section-title">Me, mostly.</h2>
+          <p class="section-subtitle">
+            Portraits, ordinary days, dressed-up days, and photographs
+            that felt worth keeping.
+          </p>
+        </div>
+
+        <div class="masonry" aria-label="Personal photographs of Pearl Bipin">
+          <figure class="photo reveal">
+            <img src="Photos/P1.jpg" alt="Pearl Bipin — personal photograph P1" loading="eager" fetchpriority="high">
+            <span class="photo-label">P1</span>
+          </figure>
+          <figure class="photo reveal"><img src="Photos/P2.jpg" alt="Pearl Bipin — personal photograph P2" loading="lazy"><span class="photo-label">P2</span></figure>
+          <figure class="photo reveal"><img src="Photos/P3.jpg" alt="Pearl Bipin — personal photograph P3" loading="lazy"><span class="photo-label">P3</span></figure>
+          <figure class="photo reveal"><img src="Photos/P4.jpg" alt="Pearl Bipin — personal photograph P4" loading="lazy"><span class="photo-label">P4</span></figure>
+          <figure class="photo reveal"><img src="Photos/P5.jpg" alt="Pearl Bipin — personal photograph P5" loading="lazy"><span class="photo-label">P5</span></figure>
+          <figure class="photo reveal"><img src="Photos/P6.jpg" alt="Pearl Bipin — personal photograph P6" loading="lazy"><span class="photo-label">P6</span></figure>
+          <figure class="photo reveal"><img src="Photos/P7.jpg" alt="Pearl Bipin — personal photograph P7" loading="lazy"><span class="photo-label">P7</span></figure>
+          <figure class="photo reveal"><img src="Photos/P8.jpg" alt="Pearl Bipin — personal photograph P8" loading="lazy"><span class="photo-label">P8</span></figure>
+          <figure class="photo reveal"><img src="Photos/P9.jpg" alt="Pearl Bipin — personal photograph P9" loading="lazy"><span class="photo-label">P9</span></figure>
+          <figure class="photo reveal"><img src="Photos/P10.jpg" alt="Pearl Bipin — personal photograph P10" loading="lazy"><span class="photo-label">P10</span></figure>
+          <figure class="photo reveal"><img src="Photos/P11.jpg" alt="Pearl Bipin — personal photograph P11" loading="lazy"><span class="photo-label">P11</span></figure>
+          <figure class="photo reveal"><img src="Photos/P12.jpg" alt="Pearl Bipin — personal photograph P12" loading="lazy"><span class="photo-label">P12</span></figure>
+          <figure class="photo reveal"><img src="Photos/P13.jpg" alt="Pearl Bipin — personal photograph P13" loading="lazy"><span class="photo-label">P13</span></figure>
+          <figure class="photo reveal"><img src="Photos/P14.jpg" alt="Pearl Bipin — personal photograph P14" loading="lazy"><span class="photo-label">P14</span></figure>
+          <figure class="photo reveal"><img src="Photos/P15.jpg" alt="Pearl Bipin — personal photograph P15" loading="lazy"><span class="photo-label">P15</span></figure>
+          <figure class="photo reveal"><img src="Photos/P16.jpg" alt="Pearl Bipin — personal photograph P16" loading="lazy"><span class="photo-label">P16</span></figure>
+          <figure class="photo reveal"><img src="Photos/P17.jpg" alt="Pearl Bipin — personal photograph P17" loading="lazy"><span class="photo-label">P17</span></figure>
+          <figure class="photo reveal"><img src="Photos/P18.jpg" alt="Pearl Bipin — personal photograph P18" loading="lazy"><span class="photo-label">P18</span></figure>
+          <figure class="photo reveal"><img src="Photos/P19.jpg" alt="Pearl Bipin — personal photograph P19" loading="lazy"><span class="photo-label">P19</span></figure>
+          <figure class="photo reveal"><img src="Photos/P20.jpg" alt="Pearl Bipin — personal photograph P20" loading="lazy"><span class="photo-label">P20</span></figure>
+          <figure class="photo reveal"><img src="Photos/P21.jpg" alt="Pearl Bipin — personal photograph P21" loading="lazy"><span class="photo-label">P21</span></figure>
+          <figure class="photo reveal"><img src="Photos/P22.jpg" alt="Pearl Bipin — personal photograph P22" loading="lazy"><span class="photo-label">P22</span></figure>
+          <figure class="photo reveal"><img src="Photos/P23.jpg" alt="Pearl Bipin — personal photograph P23" loading="lazy"><span class="photo-label">P23</span></figure>
+          <figure class="photo reveal"><img src="Photos/P24.jpg" alt="Pearl Bipin — personal photograph P24" loading="lazy"><span class="photo-label">P24</span></figure>
+          <figure class="photo reveal"><img src="Photos/P25.jpg" alt="Pearl Bipin — personal photograph P25" loading="lazy"><span class="photo-label">P25</span></figure>
+          <figure class="photo reveal"><img src="Photos/P26.jpg" alt="Pearl Bipin — personal photograph P26" loading="lazy"><span class="photo-label">P26</span></figure>
+          <figure class="photo reveal"><img src="Photos/P27.jpg" alt="Pearl Bipin — personal photograph P27" loading="lazy"><span class="photo-label">P27</span></figure>
+          <figure class="photo reveal"><img src="Photos/P28.jpg" alt="Pearl Bipin — personal photograph P28" loading="lazy"><span class="photo-label">P28</span></figure>
+          <figure class="photo reveal"><img src="Photos/P29.jpg" alt="Pearl Bipin — personal photograph P29" loading="lazy"><span class="photo-label">P29</span></figure>
+          <figure class="photo reveal"><img src="Photos/P30.jpg" alt="Pearl Bipin — personal photograph P30" loading="lazy"><span class="photo-label">P30</span></figure>
+          <figure class="photo reveal"><img src="Photos/P31.jpg" alt="Pearl Bipin — personal photograph P31" loading="lazy"><span class="photo-label">P31</span></figure>
+          <figure class="photo reveal"><img src="Photos/P32.jpg" alt="Pearl Bipin — personal photograph P32" loading="lazy"><span class="photo-label">P32</span></figure>
+          <figure class="photo reveal"><img src="Photos/P33.jpg" alt="Pearl Bipin — personal photograph P33" loading="lazy"><span class="photo-label">P33</span></figure>
+          <figure class="photo reveal"><img src="Photos/P34.jpg" alt="Pearl Bipin — personal photograph P34" loading="lazy"><span class="photo-label">P34</span></figure>
+          <figure class="photo reveal"><img src="Photos/P35.jpg" alt="Pearl Bipin — personal photograph P35" loading="lazy"><span class="photo-label">P35</span></figure>
+          <figure class="photo reveal"><img src="Photos/P36.jpg" alt="Pearl Bipin — personal photograph P36" loading="lazy"><span class="photo-label">P36</span></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ART -->
+    <section class="section" id="artwork">
+      <div class="site-shell">
+        <div class="section-intro reveal">
+          <span class="section-index">02 · Things I make</span>
+          <h2 class="section-title">Paper, ink, ideas.</h2>
+          <p class="section-subtitle">
+            Origami, drawings, sketches, and other little things that came out of making something by hand.
+          </p>
+        </div>
+
+        <div class="masonry art" aria-label="Artwork by Pearl Bipin">
+          <figure class="photo reveal"><img src="Photos/A1.jpg" alt="Artwork by Pearl Bipin — A1" loading="lazy"><span class="photo-label">A1</span></figure>
+          <figure class="photo reveal"><img src="Photos/A2.jpg" alt="Artwork by Pearl Bipin — A2" loading="lazy"><span class="photo-label">A2</span></figure>
+          <figure class="photo reveal"><img src="Photos/A3.jpg" alt="Artwork by Pearl Bipin — A3" loading="lazy"><span class="photo-label">A3</span></figure>
+          <figure class="photo reveal"><img src="Photos/A4.jpg" alt="Artwork by Pearl Bipin — A4" loading="lazy"><span class="photo-label">A4</span></figure>
+          <figure class="photo reveal"><img src="Photos/A5.jpg" alt="Artwork by Pearl Bipin — A5" loading="lazy"><span class="photo-label">A5</span></figure>
+          <figure class="photo reveal"><img src="Photos/A6.jpg" alt="Artwork by Pearl Bipin — A6" loading="lazy"><span class="photo-label">A6</span></figure>
+          <figure class="photo reveal"><img src="Photos/A7.jpg" alt="Artwork by Pearl Bipin — A7" loading="lazy"><span class="photo-label">A7</span></figure>
+          <figure class="photo reveal"><img src="Photos/A8.jpg" alt="Artwork by Pearl Bipin — A8" loading="lazy"><span class="photo-label">A8</span></figure>
+          <figure class="photo reveal"><img src="Photos/A9.jpg" alt="Artwork by Pearl Bipin — A9" loading="lazy"><span class="photo-label">A9</span></figure>
+          <figure class="photo reveal"><img src="Photos/A10.jpg" alt="Artwork by Pearl Bipin — A10" loading="lazy"><span class="photo-label">A10</span></figure>
+          <figure class="photo reveal"><img src="Photos/A11.jpg" alt="Artwork by Pearl Bipin — A11" loading="lazy"><span class="photo-label">A11</span></figure>
+          <figure class="photo reveal"><img src="Photos/A12.jpg" alt="Artwork by Pearl Bipin — A12" loading="lazy"><span class="photo-label">A12</span></figure>
+          <figure class="photo reveal"><img src="Photos/A13.jpg" alt="Artwork by Pearl Bipin — A13" loading="lazy"><span class="photo-label">A13</span></figure>
+          <figure class="photo reveal"><img src="Photos/A14.jpg" alt="Artwork by Pearl Bipin — A14" loading="lazy"><span class="photo-label">A14</span></figure>
+          <figure class="photo reveal"><img src="Photos/A15.jpg" alt="Artwork by Pearl Bipin — A15" loading="lazy"><span class="photo-label">A15</span></figure>
+          <figure class="photo reveal"><img src="Photos/A16.jpg" alt="Artwork by Pearl Bipin — A16" loading="lazy"><span class="photo-label">A16</span></figure>
+          <figure class="photo reveal"><img src="Photos/A17.jpg" alt="Artwork by Pearl Bipin — A17" loading="lazy"><span class="photo-label">A17</span></figure>
+          <figure class="photo reveal"><img src="Photos/A18.jpg" alt="Artwork by Pearl Bipin — A18" loading="lazy"><span class="photo-label">A18</span></figure>
+          <figure class="photo reveal"><img src="Photos/A19.jpg" alt="Artwork by Pearl Bipin — A19" loading="lazy"><span class="photo-label">A19</span></figure>
+          <figure class="photo reveal"><img src="Photos/A20.jpg" alt="Artwork by Pearl Bipin — A20" loading="lazy"><span class="photo-label">A20</span></figure>
+          <figure class="photo reveal"><img src="Photos/A21.jpg" alt="Artwork by Pearl Bipin — A21" loading="lazy"><span class="photo-label">A21</span></figure>
+          <figure class="photo reveal"><img src="Photos/A22.jpg" alt="Artwork by Pearl Bipin — A22" loading="lazy"><span class="photo-label">A22</span></figure>
+          <figure class="photo reveal"><img src="Photos/A23.jpg" alt="Artwork by Pearl Bipin — A23" loading="lazy"><span class="photo-label">A23</span></figure>
+          <figure class="photo reveal"><img src="Photos/A24.jpg" alt="Artwork by Pearl Bipin — A24" loading="lazy"><span class="photo-label">A24</span></figure>
+          <figure class="photo reveal"><img src="Photos/A25.jpg" alt="Artwork by Pearl Bipin — A25" loading="lazy"><span class="photo-label">A25</span></figure>
+          <figure class="photo reveal"><img src="Photos/A26.jpg" alt="Artwork by Pearl Bipin — A26" loading="lazy"><span class="photo-label">A26</span></figure>
+          <figure class="photo reveal"><img src="Photos/A27.jpg" alt="Artwork by Pearl Bipin — A27" loading="lazy"><span class="photo-label">A27</span></figure>
+          <figure class="photo reveal"><img src="Photos/A28.jpg" alt="Artwork by Pearl Bipin — A28" loading="lazy"><span class="photo-label">A28</span></figure>
+          <figure class="photo reveal"><img src="Photos/A29.jpg" alt="Artwork by Pearl Bipin — A29" loading="lazy"><span class="photo-label">A29</span></figure>
+          <figure class="photo reveal"><img src="Photos/A30.jpg" alt="Artwork by Pearl Bipin — A30" loading="lazy"><span class="photo-label">A30</span></figure>
+          <figure class="photo reveal"><img src="Photos/A31.jpg" alt="Artwork by Pearl Bipin — A31" loading="lazy"><span class="photo-label">A31</span></figure>
+          <figure class="photo reveal"><img src="Photos/A32.jpg" alt="Artwork by Pearl Bipin — A32" loading="lazy"><span class="photo-label">A32</span></figure>
+          <figure class="photo reveal"><img src="Photos/A33.jpg" alt="Artwork by Pearl Bipin — A33" loading="lazy"><span class="photo-label">A33</span></figure>
+          <figure class="photo reveal"><img src="Photos/A34.jpg" alt="Artwork by Pearl Bipin — A34" loading="lazy"><span class="photo-label">A34</span></figure>
+          <figure class="photo reveal"><img src="Photos/A35.jpg" alt="Artwork by Pearl Bipin — A35" loading="lazy"><span class="photo-label">A35</span></figure>
+          <figure class="photo reveal"><img src="Photos/A36.jpg" alt="Artwork by Pearl Bipin — A36" loading="lazy"><span class="photo-label">A36</span></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- MOTORCYCLES -->
+    <section class="section" id="motorcycles">
+      <div class="site-shell">
+        <div class="section-intro reveal">
+          <span class="section-index">03 · Two wheels</span>
+          <h2 class="section-title">The motorcycle corner.</h2>
+          <p class="section-subtitle">
+            A smaller collection of machines, rides, and moments around them.
+          </p>
+        </div>
+
+        <div class="mini-wrap">
+          <div class="mini-grid" aria-label="Pearl Bipin motorcycle photographs">
+            <figure class="photo reveal"><img src="Photos/M1.jpg" alt="Pearl Bipin — motorcycle photograph M1" loading="lazy"><span class="photo-label">M1</span></figure>
+            <figure class="photo reveal"><img src="Photos/M2.jpg" alt="Pearl Bipin — motorcycle photograph M2" loading="lazy"><span class="photo-label">M2</span></figure>
+            <figure class="photo reveal"><img src="Photos/M3.jpg" alt="Pearl Bipin — motorcycle photograph M3" loading="lazy"><span class="photo-label">M3</span></figure>
+            <figure class="photo reveal"><img src="Photos/M4.jpg" alt="Pearl Bipin — motorcycle photograph M4" loading="lazy"><span class="photo-label">M4</span></figure>
+            <figure class="photo reveal"><img src="Photos/M5.jpg" alt="Pearl Bipin — motorcycle photograph M5" loading="lazy"><span class="photo-label">M5</span></figure>
+            <figure class="photo reveal"><img src="Photos/M6.jpg" alt="Pearl Bipin — motorcycle photograph M6" loading="lazy"><span class="photo-label">M6</span></figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MEMORIES -->
+    <section class="section" id="memories">
+      <div class="site-shell">
+        <div class="section-intro reveal">
+          <span class="section-index">04 · Kept close</span>
+          <h2 class="section-title">Memories.</h2>
+          <p class="section-subtitle">
+            Family photographs and older moments — the part of an archive that becomes more valuable with time.
+          </p>
+        </div>
+
+        <div class="masonry" aria-label="Pearl Bipin family and older memory photographs">
+          <figure class="photo reveal"><img src="Photos/R1.jpg" alt="Pearl Bipin — family or memory photograph R1" loading="lazy"><span class="photo-label">R1</span></figure>
+          <figure class="photo reveal"><img src="Photos/R2.jpg" alt="Pearl Bipin — family or memory photograph R2" loading="lazy"><span class="photo-label">R2</span></figure>
+          <figure class="photo reveal"><img src="Photos/R3.jpg" alt="Pearl Bipin — family or memory photograph R3" loading="lazy"><span class="photo-label">R3</span></figure>
+          <figure class="photo reveal"><img src="Photos/R4.jpg" alt="Pearl Bipin — family or memory photograph R4" loading="lazy"><span class="photo-label">R4</span></figure>
+          <figure class="photo reveal"><img src="Photos/R5.jpg" alt="Pearl Bipin — family or memory photograph R5" loading="lazy"><span class="photo-label">R5</span></figure>
+          <figure class="photo reveal"><img src="Photos/R6.jpg" alt="Pearl Bipin — family or memory photograph R6" loading="lazy"><span class="photo-label">R6</span></figure>
+          <figure class="photo reveal"><img src="Photos/R7.jpg" alt="Pearl Bipin — family or memory photograph R7" loading="lazy"><span class="photo-label">R7</span></figure>
+          <figure class="photo reveal"><img src="Photos/R8.jpg" alt="Pearl Bipin — family or memory photograph R8" loading="lazy"><span class="photo-label">R8</span></figure>
+          <figure class="photo reveal"><img src="Photos/R9.jpg" alt="Pearl Bipin — family or memory photograph R9" loading="lazy"><span class="photo-label">R9</span></figure>
+          <figure class="photo reveal"><img src="Photos/R10.jpg" alt="Pearl Bipin — family or memory photograph R10" loading="lazy"><span class="photo-label">R10</span></figure>
+          <figure class="photo reveal"><img src="Photos/R11.jpg" alt="Pearl Bipin — family or memory photograph R11" loading="lazy"><span class="photo-label">R11</span></figure>
+          <figure class="photo reveal"><img src="Photos/R12.jpg" alt="Pearl Bipin — family or memory photograph R12" loading="lazy"><span class="photo-label">R12</span></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- MORE -->
+    <section class="section" id="more">
+      <div class="site-shell">
+        <div class="section-intro reveal">
+          <span class="section-index">05 · A few other things</span>
+          <h2 class="section-title">The little details.</h2>
+          <p class="section-subtitle">
+            Cats, food, and a couple of things that do not need their own grand category.
+          </p>
+        </div>
+
+        <div class="mini-wrap">
+          <div class="section-intro reveal" style="margin-bottom: 25px;">
+            <span class="section-index">Cats</span>
+            <h3 class="section-title" style="font-size: clamp(2rem, 4vw, 3.4rem);">Cats, naturally.</h3>
+          </div>
+
+          <div class="mini-grid" aria-label="Pearl Bipin cat photographs">
+            <figure class="photo reveal"><img src="Photos/K1.jpg" alt="Pearl Bipin — cat photograph K1" loading="lazy"><span class="photo-label">K1</span></figure>
+            <figure class="photo reveal"><img src="Photos/K2.jpg" alt="Pearl Bipin — cat photograph K2" loading="lazy"><span class="photo-label">K2</span></figure>
+            <figure class="photo reveal"><img src="Photos/K3.jpg" alt="Pearl Bipin — cat photograph K3" loading="lazy"><span class="photo-label">K3</span></figure>
+            <figure class="photo reveal"><img src="Photos/K4.jpg" alt="Pearl Bipin — cat photograph K4" loading="lazy"><span class="photo-label">K4</span></figure>
+            <figure class="photo reveal"><img src="Photos/K5.jpg" alt="Pearl Bipin — cat photograph K5" loading="lazy"><span class="photo-label">K5</span></figure>
+            <figure class="photo reveal"><img src="Photos/K6.jpg" alt="Pearl Bipin — cat photograph K6" loading="lazy"><span class="photo-label">K6</span></figure>
+            <figure class="photo reveal"><img src="Photos/K7.jpg" alt="Pearl Bipin — cat photograph K7" loading="lazy"><span class="photo-label">K7</span></figure>
+            <figure class="photo reveal"><img src="Photos/K8.jpg" alt="Pearl Bipin — cat photograph K8" loading="lazy"><span class="photo-label">K8</span></figure>
+          </div>
+
+          <div class="section-intro reveal" style="margin: 100px auto 25px;">
+            <span class="section-index">Food</span>
+            <h3 class="section-title" style="font-size: clamp(2rem, 4vw, 3.4rem);">Things I eat.</h3>
+          </div>
+
+          <div class="mini-grid" aria-label="Pearl Bipin food photographs">
+            <figure class="photo reveal"><img src="Photos/C1.jpg" alt="Pearl Bipin — food photograph C1" loading="lazy"><span class="photo-label">C1</span></figure>
+            <figure class="photo reveal"><img src="Photos/C2.jpg" alt="Pearl Bipin — food photograph C2" loading="lazy"><span class="photo-label">C2</span></figure>
+            <figure class="photo reveal"><img src="Photos/C3.jpg" alt="Pearl Bipin — food photograph C3" loading="lazy"><span class="photo-label">C3</span></figure>
+            <figure class="photo reveal"><img src="Photos/C4.jpg" alt="Pearl Bipin — food photograph C4" loading="lazy"><span class="photo-label">C4</span></figure>
+          </div>
+
+          <div class="section-intro reveal" style="margin: 100px auto 25px;">
+            <span class="section-index">Misc.</span>
+            <h3 class="section-title" style="font-size: clamp(2rem, 4vw, 3.4rem);">And a few more.</h3>
+          </div>
+
+          <div class="two-up" aria-label="Miscellaneous photographs">
+            <figure class="photo reveal"><img src="Photos/H1.jpg" alt="Pearl Bipin — miscellaneous photograph H1" loading="lazy"><span class="photo-label">H1</span></figure>
+            <figure class="photo reveal"><img src="Photos/H2.jpg" alt="Pearl Bipin — miscellaneous photograph H2" loading="lazy"><span class="photo-label">H2</span></figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div class="site-shell reveal">
+        <div class="closing-mark">✦</div>
+        <p>
+          Nothing particularly grand. Just a record of a person,
+          some things he loves, and some moments he did not want to lose.
+        </p>
+        <div class="small">Pearl Bipin Photos</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="site-shell footer-inner">
+      <p>Pearl Bipin Photos</p>
+      <p>© <span id="year"></span> Pearl Bipin</p>
+    </div>
+  </footer>
+
+  <!-- Full-screen photo viewer -->
+  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Expanded photograph">
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close photo viewer">×</button>
+    <button class="lightbox-prev" id="lightboxPrev" type="button" aria-label="Previous photo">‹</button>
+    <img id="lightboxImage" src="" alt="">
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+    <button class="lightbox-next" id="lightboxNext" type="button" aria-label="Next photo">›</button>
+  </div>
+
+  <script>
+    (() => {
+      const items = [...document.querySelectorAll(".photo")];
+      const lightbox = document.getElementById("lightbox");
+      const image = document.getElementById("lightboxImage");
+      const caption = document.getElementById("lightboxCaption");
+      const close = document.getElementById("lightboxClose");
+      const prev = document.getElementById("lightboxPrev");
+      const next = document.getElementById("lightboxNext");
+      let current = 0;
+      let lastFocused = null;
+
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      function setPhoto(index) {
+        current = (index + items.length) % items.length;
+        const source = items[current].querySelector("img");
+        const label = items[current].querySelector(".photo-label");
+
+        image.src = source.currentSrc || source.src;
+        image.alt = source.alt;
+        caption.textContent = label ? label.textContent : "";
+      }
+
+      function openViewer(index) {
+        lastFocused = document.activeElement;
+        setPhoto(index);
+        lightbox.classList.add("active");
+        lightbox.setAttribute("aria-hidden", "false");
+        document.body.classList.add("is-viewing");
+        close.focus();
+      }
+
+      function closeViewer() {
+        lightbox.classList.remove("active");
+        lightbox.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("is-viewing");
+        image.removeAttribute("src");
+
+        if (lastFocused && typeof lastFocused.focus === "function") {
+          lastFocused.focus();
+        }
+      }
+
+      items.forEach((item, index) => {
+        item.tabIndex = 0;
+        item.setAttribute("role", "button");
+        item.setAttribute("aria-label", "Open " + item.querySelector("img").alt);
+
+        item.addEventListener("click", () => openViewer(index));
+        item.addEventListener("keydown", event => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openViewer(index);
+          }
+        });
+      });
+
+      close.addEventListener("click", closeViewer);
+      prev.addEventListener("click", () => setPhoto(current - 1));
+      next.addEventListener("click", () => setPhoto(current + 1));
+
+      lightbox.addEventListener("click", event => {
+        if (event.target === lightbox) closeViewer();
+      });
+
+      document.addEventListener("keydown", event => {
+        if (!lightbox.classList.contains("active")) return;
+
+        if (event.key === "Escape") closeViewer();
+        if (event.key === "ArrowLeft") setPhoto(current - 1);
+        if (event.key === "ArrowRight") setPhoto(current + 1);
+      });
+
+      // Reveal sections and images as they enter the viewport.
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.08, rootMargin: "0px 0px -45px 0px" });
+
+      document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+    })();
+  </script>
+</body>
+</html>
